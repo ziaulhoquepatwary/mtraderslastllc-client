@@ -17,7 +17,7 @@ const patuaOne = Patua_One({
 });
 
 export const metadata = {
-    title: "mtraderslastllc",
+    title: "M Traders Last LLC",
     description: "Web Development & Digital Solutions Platform",
 };
 

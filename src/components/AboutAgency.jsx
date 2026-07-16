@@ -124,6 +124,7 @@ function AboutAgency() {
                                         src="/client-image-1.jpg"
                                         alt="Savannah Nguyen"
                                         fill
+                                        quality={100}
                                         priority
                                         suppressHydrationWarning
                                         className="object-cover"

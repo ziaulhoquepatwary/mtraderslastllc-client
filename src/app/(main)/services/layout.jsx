@@ -1,9 +1,9 @@
 export const metadata = {
-    title: "Technology",
+    title: "Services",
     description: "Web Development & Digital Solutions Platform",
 };
 
-export default function Technology({ children }) {
+export default function Services({ children }) {
     return (
         <section className="w-full h-full min-h-screen antialiased">
             {children}
