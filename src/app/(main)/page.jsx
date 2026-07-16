@@ -1,7 +1,10 @@
+import Benner from "@/components/Benner"
 
 function Home() {
     return (
-        <div>Home</div>
+        <div>
+            <Benner />
+        </div>
     )
 }
 
