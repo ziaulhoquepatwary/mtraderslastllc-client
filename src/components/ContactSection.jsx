@@ -37,7 +37,7 @@ function ContactSection() {
                         <span className="w-6 h-[2px] bg-cyan-500 rounded-full"></span>
                     </div>
 
-                    <h2 className="text-4xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white">
+                    <h2 className="text-4xl sm:text-5xl bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-blue-600 dark:from-cyan-400 dark:to-blue-500">
                         Let's start a project together
                     </h2>
 
@@ -118,7 +118,7 @@ function ContactSection() {
                             </div>
                         </div>
 
-                        <div className="p-6 rounded-2xl border border-slate-100 dark:border-slate-900 bg-slate-50/30 dark:bg-slate-900/20 space-y-4 mt-auto">
+                        <div className="p-6 rounded-2xl dark:border-slate-900 bg-slate-50/30 dark:bg-slate-900/20 space-y-4 mt-auto">
                             <div className="flex items-start gap-3">
                                 <Building2 className="w-5 h-5 text-cyan-500 shrink-0 mt-0.5" />
                                 <div>

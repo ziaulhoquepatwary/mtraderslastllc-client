@@ -17,7 +17,7 @@ export default function AboutMission() {
                             </span>
                         </div>
 
-                        <h2 className="text-4xl sm:text-5xl font-black tracking-tight leading-[1.15] text-slate-900 dark:text-white uppercase">
+                        <h2 className="text-4xl sm:text-5xl font-black tracking-tight leading-[1.15] bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-blue-600 dark:from-cyan-400 dark:to-blue-800">
                             Mission
                         </h2>
 
