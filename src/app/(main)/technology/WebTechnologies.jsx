@@ -1,6 +1,6 @@
 "use client";
 
-import { Bubble, AngularIcon, TailwindIcon, MuiIcon, NodeIcon, VueIcon, NextIcon, LaravelIcon, FirebaseIcon, PythonIcon, TypeScriptIcon, ReactIcon } from "./icons/icon";
+import { Bubble, AngularIcon, TailwindIcon, MuiIcon, NodeIcon, VueIcon, NextIcon, LaravelIcon, FirebaseIcon, PythonIcon, TypeScriptIcon, ReactIcon } from "./icons/tech-icons";
 
 function WebTechnologies() {
     return (
