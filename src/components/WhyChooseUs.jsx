@@ -8,7 +8,8 @@ import { motion, useInView, animate } from "framer-motion";
 function Counter({ value, duration = 2 }) {
     const [count, setCount] = useState(0);
     const ref = useRef(null);
-    const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+    const isInView = useInView(ref, { once: true, margin: "-20px" });
 
     useEffect(() => {
         if (isInView) {
@@ -32,7 +33,6 @@ function WhyChooseUs() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
-                    {/* Left Column: Core Value Propositions & Accomplishments */}
                     <div className="lg:col-span-7 space-y-8 order-2 lg:order-1">
                         <div className="space-y-4">
                             <div className="flex items-center gap-2">
@@ -51,14 +51,13 @@ function WhyChooseUs() {
                             </p>
                         </div>
 
-                        {/* Statistics Cards Wrapper */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
 
-                            {/* Card 1: Team Strength */}
                             <div className="bg-slate-50/50 dark:bg-slate-900/40 border border-slate-100 dark:border-slate-900/50 p-8 rounded-2xl flex flex-col justify-between min-h-50 shadow-xs">
                                 <div>
-                                    <h3 className="text-4xl font-black text-slate-900 dark:text-white mb-2">
-                                        <Counter value={75} />+
+                                    <h3 className="text-4xl font-black text-slate-900 dark:text-white mb-2 flex items-center gap-0.5">
+                                        <Counter value={75} />
+                                        <span>+</span>
                                     </h3>
                                     <p className="text-sm font-bold text-slate-700 dark:text-slate-300">
                                         Skilled Team Developers
@@ -71,11 +70,11 @@ function WhyChooseUs() {
                                 </div>
                             </div>
 
-                            {/* Card 2: Global Service Range */}
                             <div className="bg-slate-50/50 dark:bg-slate-900/40 border border-slate-100 dark:border-slate-900/50 p-8 rounded-2xl flex flex-col justify-between min-h-50 shadow-xs">
                                 <div>
-                                    <h3 className="text-4xl font-black text-slate-900 dark:text-white mb-2">
-                                        <Counter value={35} />+
+                                    <h3 className="text-4xl font-black text-slate-900 dark:text-white mb-2 flex items-center gap-0.5">
+                                        <Counter value={35} />
+                                        <span>+</span>
                                     </h3>
                                     <p className="text-sm font-bold text-slate-700 dark:text-slate-300">
                                         Countries Served Globally
@@ -90,7 +89,6 @@ function WhyChooseUs() {
 
                         </div>
 
-                        {/* Interactive Buttons & Contact Details */}
                         <div className="flex flex-col sm:flex-row sm:items-center gap-6 pt-4">
                             <Link
                                 href="/contact"
@@ -100,7 +98,6 @@ function WhyChooseUs() {
                                 <span className="group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform duration-300">↗</span>
                             </Link>
 
-                            {/* Dynamic External Link Targeting WhatsApp Directly */}
                             <a
                                 href={whatsappUrl}
                                 target="_blank"
@@ -122,7 +119,6 @@ function WhyChooseUs() {
                         </div>
                     </div>
 
-                    {/* Right Column: Visual Brand Banner Image */}
                     <div className="lg:col-span-5 relative flex justify-center order-1 lg:order-2">
                         <div className="relative w-full h-full max-w-125 aspect-square rounded-2xl overflow-hidden shadow-xl border border-slate-200/50 dark:border-slate-800/50">
                             <Image

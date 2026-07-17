@@ -27,27 +27,15 @@ export default function AboutMission() {
                     </div>
 
                     {/* Right Column: Styled Image Banner */}
-                    <div className="lg:col-span-5 flex justify-center">
-                        <div className="relative w-full max-w-[480px] aspect-[4/3] sm:aspect-[1/1] rounded-2xl overflow-hidden">
-                            {/* Light Mode Image */}
+                    <div className="lg:col-span-5 flex justify-center w-full">
+                        <div className="relative w-full aspect-[4/3] sm:aspect-[1/1] rounded-2xl overflow-hidden">
                             <Image
                                 src="/mission_banner.png"
                                 alt="Our Business Mission"
                                 fill
                                 quality={100}
                                 unoptimized={true}
-                                className="object-cover dark:hidden"
-                                priority
-                            />
-
-                            {/* Dark Mode Image */}
-                            <Image
-                                src="/mission_banner-dark.png"
-                                alt="Our Business Mission"
-                                fill
-                                quality={100}
-                                unoptimized={true}
-                                className="object-cover hidden dark:block"
+                                className="object-contain"
                                 priority
                             />
                         </div>
