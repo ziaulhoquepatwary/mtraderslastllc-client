@@ -78,7 +78,7 @@ function Testimonials() {
                     animate={{ x: ["0%", "-50%"] }}
                     transition={{
                         ease: "linear",
-                        duration: reviews.length > 3 ? reviews.length * 10 : 30, // Adjusted speed to make text easily readable
+                        duration: reviews.length > 3 ? reviews.length * 10 : 30,
                         repeat: Infinity,
                     }}
                     whileHover={{ animationPlayState: "paused" }}

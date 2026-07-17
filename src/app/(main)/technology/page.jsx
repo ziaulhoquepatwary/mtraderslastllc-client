@@ -2,6 +2,7 @@ import React from 'react'
 import WebTechnologies from './WebTechnologies'
 import DatabaseTechnologies from './DatabaseTechnologies'
 import PremiumFeatures from './PremiumFeatures'
+import ContinuousDevelopment from './ContinuousDevelopment'
 
 function Home() {
     return (
@@ -9,6 +10,7 @@ function Home() {
             <WebTechnologies />
             <DatabaseTechnologies />
             <PremiumFeatures />
+            <ContinuousDevelopment />
         </section>
     )
 }
