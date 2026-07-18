@@ -63,7 +63,7 @@ function PackageCard({ packageData }) {
 
                 {/* Details Button */}
                 <Link
-                    href={`/packageDatas/${packageData.id}`}
+                    href={`/package/${packageData.id}`}
                     className="w-full px-4 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold rounded-lg hover:shadow-lg hover:shadow-cyan-500/30 transition-all duration-200 flex items-center justify-center gap-2 group/btn"
                 >
                     View Details
