@@ -37,9 +37,13 @@ export default function LegalDirectory() {
 
                 {/* Header Title */}
                 <div className="border-b border-slate-100 dark:border-slate-900 pb-6 mb-10 text-left">
-                    <span className="text-[11px] font-bold uppercase tracking-widest text-cyan-600 dark:text-cyan-400">
-                        Legal & Compliance
-                    </span>
+                    <div className="flex items-center gap-2">
+                        <span className="w-6 h-[2px] bg-cyan-500 rounded-full"></span>
+                        <span className="text-xs font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400">
+                            Legal & Compliance
+                        </span>
+                        <span className="w-6 h-[2px] bg-cyan-500 rounded-full"></span>
+                    </div>
                     <h3 className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-white mt-1">
                         Regulatory Framework & Policies
                     </h3>

@@ -25,9 +25,13 @@ export default function ContactFAQ() {
         <div className="max-w-4xl mx-auto px-4 pt-10 pb-12 text-left">
             {/* FAQ Header */}
             <div className="text-center space-y-2 mb-10">
-                <span className="text-[11px] font-bold uppercase tracking-widest text-cyan-600 dark:text-cyan-400">
-                    Have Questions?
-                </span>
+                <div className="flex items-center justify-center gap-2">
+                    <span className="w-6 h-[2px] bg-cyan-500 rounded-full"></span>
+                    <span className="text-xs font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400">
+                        Have Questions?
+                    </span>
+                    <span className="w-6 h-[2px] bg-cyan-500 rounded-full"></span>
+                </div>
                 <h3 className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-white">
                     Frequently Asked Queries
                 </h3>

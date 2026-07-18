@@ -9,8 +9,12 @@ function WebTechnologies() {
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
 
                     <div className="lg:col-span-6 text-center lg:text-left space-y-6">
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 text-xs sm:text-sm font-bold uppercase tracking-wider">
-                            Web Technologies
+                        <div className="flex items-center gap-2">
+                            <span className="w-6 h-[2px] bg-cyan-500 rounded-full"></span>
+                            <span className="text-xs font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400">
+                                Web Technologies
+                            </span>
+                            <span className="w-6 h-[2px] bg-cyan-500 rounded-full"></span>
                         </div>
 
                         <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black tracking-tight text-slate-900 dark:text-white leading-tight">

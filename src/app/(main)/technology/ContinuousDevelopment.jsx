@@ -31,9 +31,13 @@ export default function ContinuousDevelopment() {
         <section className="w-full pt-15 bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-100 transition-colors duration-300 overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center space-y-3 mb-12">
-                    <span className="text-xs font-bold uppercase tracking-widest text-cyan-600 dark:text-cyan-400">
-                        Continuous Development
-                    </span>
+                    <div className="flex items-center justify-center gap-2">
+                        <span className="w-6 h-[2px] bg-cyan-500 rounded-full"></span>
+                        <span className="text-xs font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400">
+                            Continuous Development
+                        </span>
+                        <span className="w-6 h-[2px] bg-cyan-500 rounded-full"></span>
+                    </div>
                     <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-slate-900 dark:text-white">
                         A never-ending pursuit
                     </h2>
@@ -62,9 +66,13 @@ export default function ContinuousDevelopment() {
                     {/* Left Side Content & Features */}
                     <div className="lg:col-span-6 space-y-8">
                         <div className="space-y-4">
-                            <span className="text-xs font-bold uppercase tracking-widest text-cyan-600 dark:text-cyan-400">
-                                Features
-                            </span>
+                            <div className="flex items-center gap-2">
+                                <span className="w-6 h-[2px] bg-cyan-500 rounded-full"></span>
+                                <span className="text-xs font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400">
+                                    Features
+                                </span>
+                                <span className="w-6 h-[2px] bg-cyan-500 rounded-full"></span>
+                            </div>
                             <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-slate-900 dark:text-white leading-[1.15]">
                                 Advanced features serving <span className="bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent">specific business needs</span>
                             </h2>

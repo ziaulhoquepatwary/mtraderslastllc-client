@@ -60,9 +60,13 @@ export default function TechMarquee() {
 
                 {/* Section Header */}
                 <div className="flex flex-col items-center text-center space-y-3 mb-12 lg:mb-16">
-                    <span className="text-xs font-bold uppercase tracking-widest text-cyan-600 dark:text-cyan-400">
-                        Technology
-                    </span>
+                    <div className="flex items-center gap-2">
+                        <span className="w-6 h-[2px] bg-cyan-500 rounded-full"></span>
+                        <span className="text-xs font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400">
+                            Technology
+                        </span>
+                        <span className="w-6 h-[2px] bg-cyan-500 rounded-full"></span>
+                    </div>
                     <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-slate-900 dark:text-white">
                         Tools we use to <span className="bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent">shape the future</span>
                     </h2>
