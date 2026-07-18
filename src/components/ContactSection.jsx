@@ -250,7 +250,7 @@ function ContactSection() {
                                         <textarea
                                             id="message"
                                             placeholder="Tell us about your project, target audience, and goals..."
-                                            className={`w-full flex-1 min-h-[220px] px-4 py-3.5 rounded-xl border bg-white dark:bg-slate-950 text-sm outline-hidden transition-all duration-200 focus:ring-2 resize-none ${errors.message
+                                            className={`w-full flex-1 px-4 py-3.5 rounded-xl border bg-white dark:bg-slate-950 text-sm outline-hidden transition-all duration-200 focus:ring-2 resize-none ${errors.message
                                                 ? "border-red-500 focus:ring-red-500/20 focus:border-red-500"
                                                 : "border-slate-200 dark:border-slate-800 focus:ring-cyan-500/20 focus:border-cyan-500"
                                                 }`}

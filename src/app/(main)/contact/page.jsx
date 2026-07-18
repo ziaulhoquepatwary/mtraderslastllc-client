@@ -1,11 +1,15 @@
 import ContactSection from '@/components/ContactSection'
 import React from 'react'
+import ContactTrustBadges from './ContactTrustBadges'
+import ContactFAQ from './ContactFAQ'
 
 function Contact() {
     return (
-        <section className="flex flex-col md:flex-row items-center justify-between gap-10 md:gap-0 px-4 md:px-8 lg:px-16 xl:px-24 2xl:px-32 py-15 dark:bg-slate-950">
+        <main className="px-4 md:px-8 lg:px-16 xl:px-24 2xl:px-32 pt-30 dark:bg-slate-950">
+            <ContactTrustBadges />
             <ContactSection />
-        </section>
+            <ContactFAQ />
+        </main>
     )
 }
 
