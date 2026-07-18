@@ -3,6 +3,7 @@ import ServiceHeading from './ServiceHeading'
 import OurServices from './OurServices'
 import ClientShowcase from './ClientShowcase'
 import OurPortfolio from './OurPortfolio'
+import FAQSection from './FAQSection'
 
 function Services() {
     return (
@@ -11,6 +12,7 @@ function Services() {
             <OurServices />
             <OurPortfolio />
             <ClientShowcase />
+            <FAQSection />
         </section>
     )
 }

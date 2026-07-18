@@ -200,9 +200,13 @@ export default function PortfolioPage() {
 
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 pb-6 border-b border-slate-100 dark:border-slate-900">
                     <div className="space-y-2 max-w-xl">
-                        <span className="text-xs font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400">
-                            Extended Case Studies
-                        </span>
+                        <div className="flex items-center gap-2">
+                            <span className="w-6 h-[2px] bg-cyan-500 rounded-full"></span>
+                            <span className="text-xs font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400">
+                                Extended Case Studies
+                            </span>
+                            <span className="w-6 h-[2px] bg-cyan-500 rounded-full"></span>
+                        </div>
                         <h1 className="text-4xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white">
                             Our Full <span className="bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent">Portfolio</span>
                         </h1>
