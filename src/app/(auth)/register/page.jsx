@@ -15,11 +15,7 @@ function Register() {
     const searchParams = useSearchParams();
     const [showPassword, setShowPassword] = useState(false);
 
-    const { register, handleSubmit, formState: { errors }, reset } = useForm({
-        defaultValues: {
-            role: "tenant"
-        }
-    });
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
     const getRedirectUrl = () => {
         const redirect =
@@ -37,7 +33,6 @@ function Register() {
             email: userData.email,
             password: userData.password,
             image: userData.imageUrl,
-            role: userData.role,
         });
 
         console.log(data, error);
