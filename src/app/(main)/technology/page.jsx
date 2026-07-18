@@ -3,6 +3,7 @@ import WebTechnologies from './WebTechnologies'
 import DatabaseTechnologies from './DatabaseTechnologies'
 import PremiumFeatures from './PremiumFeatures'
 import ContinuousDevelopment from './ContinuousDevelopment'
+import TechMarquee from './TechMarquee'
 
 function Home() {
     return (
@@ -11,6 +12,7 @@ function Home() {
             <DatabaseTechnologies />
             <PremiumFeatures />
             <ContinuousDevelopment />
+            <TechMarquee />
         </section>
     )
 }
