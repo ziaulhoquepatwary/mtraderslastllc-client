@@ -21,6 +21,7 @@ function Navbar() {
 
     const navLinks = [
         { name: "Home", href: "/" },
+        { name: "Package", href: "/package" },
         { name: "Services", href: "/services" },
         { name: "Technology", href: "/technology" },
         { name: "About", href: "/about" },
