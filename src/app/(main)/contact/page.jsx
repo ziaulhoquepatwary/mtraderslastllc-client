@@ -2,6 +2,7 @@ import ContactSection from '@/components/ContactSection'
 import React from 'react'
 import ContactTrustBadges from './ContactTrustBadges'
 import ContactFAQ from './ContactFAQ'
+import LegalDirectory from './LegalDirectory'
 
 function Contact() {
     return (
@@ -9,6 +10,7 @@ function Contact() {
             <ContactTrustBadges />
             <ContactSection />
             <ContactFAQ />
+            <LegalDirectory />
         </main>
     )
 }

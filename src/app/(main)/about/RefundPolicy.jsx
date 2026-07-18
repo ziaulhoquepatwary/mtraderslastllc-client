@@ -32,7 +32,7 @@ export default function RefundPolicy() {
                         {/* Read Full Policy Link */}
                         <div className="pt-1">
                             <Link
-                                href="/refund"
+                                href="/refund-policy"
                                 className="inline-flex items-center gap-1 text-xs font-bold text-cyan-600 dark:text-cyan-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors group"
                             >
                                 Read Full Policy

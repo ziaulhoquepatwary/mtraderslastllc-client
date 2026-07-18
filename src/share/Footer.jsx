@@ -13,10 +13,10 @@ function Footer() {
     ];
 
     const legalLinks = [
-        { name: "Terms & Conditions", href: "/terms" },
-        { name: "Privacy Policy", href: "/privacy" },
-        { name: "Refund Policy", href: "/refund" },
-        { name: "AML Policy", href: "/aml" },
+        { name: "Terms & Conditions", href: "/terms-conditions" },
+        { name: "Privacy Policy", href: "/privacy-policy" },
+        { name: "Refund Policy", href: "/refund-policy" },
+        { name: "AML Policy", href: "/aml-policy" },
     ];
 
     const whatsappUrl = "https://wa.me/13163617579";
