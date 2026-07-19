@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import Loading from '@/app/loading';
+import BackButton from './BackButton';
 
 function MyProfile() {
     const { data: session, isPending } = authClient.useSession();
@@ -78,11 +79,9 @@ function MyProfile() {
             <div className="max-w-3xl mx-auto space-y-6">
 
                 {/* Header */}
+                <BackButton />
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                        <Link href="/" className="p-2.5 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-all">
-                            <ArrowLeft size={18} className="text-slate-600 dark:text-slate-400" />
-                        </Link>
                         <div>
                             <h1 className="text-3xl font-bold text-slate-900 dark:text-white">My Profile</h1>
                             <p className="text-sm text-slate-500 dark:text-slate-400 capitalize">{user?.role || "User"}</p>
