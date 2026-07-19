@@ -2,16 +2,16 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, FilePlus, User, Briefcase, Users, ChevronRight, X, FilePlus2, CreditCard, Package, } from "lucide-react";
+import { LayoutDashboard, FilePlus, User, Briefcase, Users, ChevronRight, X, FilePlus2, CreditCard, Package, Bookmark, } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
 import { FcManager } from "react-icons/fc";
+import { BsFillCartCheckFill } from "react-icons/bs";
 
 const MENU_CONFIG = {
     user: [
         { name: "Dashboard", href: "/dashboard/user", icon: LayoutDashboard },
-        { name: "My Orders", href: "/dashboard/user/orders", icon: FilePlus },
-        { name: "Save Packages", href: "/dashboard/user/save-package", icon: FilePlus2 },
-        { name: "Payments", href: "/dashboard/user/payments", icon: CreditCard },
+        { name: "My Orders", href: "/dashboard/user/orders", icon: BsFillCartCheckFill },
+        { name: "Save Packages", href: "/dashboard/user/save-package", icon: Bookmark },
         { name: "Profile", href: "/my-profile", icon: User },
     ],
     admin: [
