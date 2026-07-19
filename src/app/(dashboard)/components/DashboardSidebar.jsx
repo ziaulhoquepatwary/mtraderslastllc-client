@@ -2,24 +2,24 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, FilePlus, Heart, User, Briefcase, Users, Clock, ChevronRight, X, FilePlus2, CreditCard, Package } from "lucide-react";
+import { LayoutDashboard, FilePlus, User, Briefcase, Users, ChevronRight, X, FilePlus2, CreditCard, Package, } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
 import { FcManager } from "react-icons/fc";
 
 const MENU_CONFIG = {
     user: [
-        { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-        { name: "My Orders", href: "/dashboard/orders", icon: FilePlus },
-        { name: "Save Packages", href: "/dashboard/favorites", icon: FilePlus2 },
-        { name: "Payments", href: "/dashboard/payments", icon: CreditCard },
+        { name: "Dashboard", href: "/dashboard/user", icon: LayoutDashboard },
+        { name: "My Orders", href: "/dashboard/user/orders", icon: FilePlus },
+        { name: "Save Packages", href: "/dashboard/user/save-package", icon: FilePlus2 },
+        { name: "Payments", href: "/dashboard/user/payments", icon: CreditCard },
         { name: "Profile", href: "/my-profile", icon: User },
     ],
     admin: [
-        { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-        { name: "Orders", href: "/admin/orders", icon: Briefcase },
-        { name: "Manage Orders", href: "/admin/orders", icon: FcManager },
-        { name: "Add Packages", href: "/admin/add-packages", icon: Package },
-        { name: "Users", href: "/admin/users", icon: Users },
+        { name: "Dashboard", href: "/dashboard/admin", icon: LayoutDashboard },
+        { name: "Orders", href: "/dashboard/admin/orders", icon: Briefcase },
+        { name: "Manage Orders", href: "/dashboard/admin/manage-order", icon: FcManager },
+        { name: "Add Packages", href: "/dashboard/admin/add-packages", icon: Package },
+        { name: "Users", href: "/dashboard/admin/users", icon: Users },
         { name: "Profile", href: "/my-profile", icon: User },
     ],
 };
@@ -51,7 +51,8 @@ function DashboardSidebar({ isOpen, closeSidebar }) {
                             alt="Logo"
                             className="h-8 w-8 sm:h-10 sm:w-10 object-contain"
                         />
-                        <span className="text-2xl font-black tracking-wider uppercase bg-clip-text text-transparent bg-linear-to-r from-cyan-500 to-blue-600 dark:from-cyan-400 dark:to-blue-500">
+
+                        <span className="bg-linear-to-r from-cyan-500 to-blue-600 bg-clip-text text-2xl font-black uppercase tracking-wider text-transparent dark:from-cyan-400 dark:to-blue-500">
                             TRADERS
                         </span>
                     </Link>
@@ -88,11 +89,13 @@ function DashboardSidebar({ isOpen, closeSidebar }) {
                     {menuItems.map((item) => {
                         const Icon = item.icon;
 
-                        const isActive =
-                            item.href === "/" + role
-                                ? pathname === item.href
-                                : pathname.startsWith(item.href + "/") ||
-                                pathname === item.href;
+                        const isDashboard =
+                            item.href === `/dashboard/${role}`;
+
+                        const isActive = isDashboard
+                            ? pathname === item.href
+                            : pathname === item.href ||
+                            pathname.startsWith(item.href + "/");
 
                         return (
                             <Link
