@@ -68,18 +68,18 @@ function DashboardSidebar({ isOpen, closeSidebar }) {
                 <div className="mb-6 px-4">
                     <div className="flex items-center gap-3 rounded-xl border border-slate-100 bg-slate-50 p-3 transition-colors duration-300 dark:border-slate-900 dark:bg-slate-900">
                         <img
-                            src={user.image || "/user.png"}
-                            alt={user.name}
+                            src={user?.image || "/user.png"}
+                            alt={user?.name}
                             className="h-10 w-10 rounded-full object-cover"
                         />
 
                         <div className="min-w-0 flex-1">
                             <h4 className="truncate text-sm font-semibold text-slate-900 dark:text-white">
-                                {user.name}
+                                {user?.name}
                             </h4>
 
                             <p className="truncate text-xs text-slate-600 dark:text-slate-400">
-                                {user.email}
+                                {user?.email}
                             </p>
                         </div>
                     </div>
@@ -132,7 +132,7 @@ function DashboardSidebar({ isOpen, closeSidebar }) {
             <div className="border-t border-slate-100 p-4 dark:border-slate-900">
                 <div className="rounded-lg bg-slate-50 px-3 py-2 transition-colors duration-300 dark:bg-slate-900">
                     <p className="text-center text-[11px] font-medium capitalize text-slate-700 dark:text-slate-300">
-                        Logged in as {user.role?.replace("_", " ")}
+                        Logged in as {user?.role?.replace("_", " ")}
                     </p>
                 </div>
             </div>

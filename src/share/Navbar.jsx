@@ -17,7 +17,7 @@ function Navbar() {
 
     // adjust these based on your role logic
     const showDashboard = !!user;
-    const dashboardHref = `/dashboard/${user.role}`;
+    const dashboardHref = `/dashboard/${user?.role}`;
 
     const navLinks = [
         { name: "Home", href: "/" },
