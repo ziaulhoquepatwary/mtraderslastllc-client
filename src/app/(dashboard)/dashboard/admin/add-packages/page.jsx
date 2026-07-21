@@ -1,8 +1,10 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import Swal from 'sweetalert2';
 import TagInput from './TagInput';
+import { createPackage } from '@/lib/action/service-package';
 
 const SERVICE_CATEGORIES = [
     "Web Development",
@@ -13,17 +15,15 @@ const SERVICE_CATEGORIES = [
     "ERP Solution",
     "Mobile App Development",
     "E-commerce Solution",
-    "Cloud Service"
+    "Cloud Service",
+    "UI/UX & Graphic Design",
+    "IT Consulting"
 ];
 
 const AddPackagePage = () => {
-    const {
-        register,
-        handleSubmit,
-        control,
-        formState: { errors },
-        reset
-    } = useForm({
+    const [loading, setLoading] = useState(false);
+
+    const { register, handleSubmit, control, formState: { errors }, reset } = useForm({
         defaultValues: {
             title: '',
             serviceCategory: '',
@@ -40,12 +40,35 @@ const AddPackagePage = () => {
         }
     });
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
+        setLoading(true);
+
         const formattedData = {
             ...data,
             price: Number(data.price)
         };
-        console.log('Submitted Data:', formattedData);
+
+        try {
+            await createPackage(formattedData);
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: 'Package published successfully.',
+                timer: 2000,
+                showConfirmButton: false
+            });
+
+            reset();
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Failed',
+                text: error.response?.data?.message || 'Something went wrong while publishing the package.'
+            });
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -55,7 +78,6 @@ const AddPackagePage = () => {
             </h2>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                {/* Title */}
                 <div>
                     <label className="block text-sm font-medium text-[#1E293B] dark:text-[#F8FAFC] mb-1.5">
                         Package Title <span className="text-red-500">*</span>
@@ -69,7 +91,6 @@ const AddPackagePage = () => {
                     {errors.title && <span className="text-xs text-red-500">{errors.title.message}</span>}
                 </div>
 
-                {/* Category & Price */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label className="block text-sm font-medium text-[#1E293B] dark:text-[#F8FAFC] mb-1.5">
@@ -102,7 +123,6 @@ const AddPackagePage = () => {
                     </div>
                 </div>
 
-                {/* Delivery Time */}
                 <div>
                     <label className="block text-sm font-medium text-[#1E293B] dark:text-[#F8FAFC] mb-1.5">
                         Delivery Time <span className="text-red-500">*</span>
@@ -116,7 +136,6 @@ const AddPackagePage = () => {
                     {errors.deliveryTime && <span className="text-xs text-red-500">{errors.deliveryTime.message}</span>}
                 </div>
 
-                {/* Short Description */}
                 <div>
                     <label className="block text-sm font-medium text-[#1E293B] dark:text-[#F8FAFC] mb-1.5">
                         Short Description <span className="text-red-500">*</span>
@@ -134,7 +153,6 @@ const AddPackagePage = () => {
                     {errors.shortDescription && <span className="text-xs text-red-500">{errors.shortDescription.message}</span>}
                 </div>
 
-                {/* Full Description */}
                 <div>
                     <label className="block text-sm font-medium text-[#1E293B] dark:text-[#F8FAFC] mb-1.5">
                         Full Description <span className="text-red-500">*</span>
@@ -148,7 +166,6 @@ const AddPackagePage = () => {
                     {errors.description && <span className="text-xs text-red-500">{errors.description.message}</span>}
                 </div>
 
-                {/* Multi Image URLs Tag Input */}
                 <TagInput
                     name="image"
                     control={control}
@@ -162,7 +179,6 @@ const AddPackagePage = () => {
                     error={errors.image}
                 />
 
-                {/* Technologies */}
                 <TagInput
                     name="technologies"
                     control={control}
@@ -176,7 +192,6 @@ const AddPackagePage = () => {
                     error={errors.technologies}
                 />
 
-                {/* Key Features */}
                 <TagInput
                     name="features"
                     control={control}
@@ -190,7 +205,6 @@ const AddPackagePage = () => {
                     error={errors.features}
                 />
 
-                {/* Who Is This For */}
                 <TagInput
                     name="whoIsThisFor"
                     control={control}
@@ -198,7 +212,6 @@ const AddPackagePage = () => {
                     placeholder="e.g. Startups, E-commerce Businesses"
                 />
 
-                {/* Add-Ons */}
                 <TagInput
                     name="addOns"
                     control={control}
@@ -206,7 +219,6 @@ const AddPackagePage = () => {
                     placeholder="e.g. Extra Revision, Fast Delivery"
                 />
 
-                {/* Requirements */}
                 <TagInput
                     name="requirements"
                     control={control}
@@ -214,12 +226,12 @@ const AddPackagePage = () => {
                     placeholder="e.g. Brand Guidelines, Domain Access"
                 />
 
-                {/* Submit Button */}
                 <button
                     type="submit"
-                    className="w-full py-3 px-4 font-semibold text-white rounded-lg bg-gradient-to-r from-[#06B6D4] to-[#2563EB] hover:opacity-95 shadow-md hover:shadow-lg transition duration-200 cursor-pointer"
+                    disabled={loading}
+                    className="w-full py-3 px-4 font-semibold text-white rounded-lg bg-gradient-to-r from-[#06B6D4] to-[#2563EB] hover:opacity-95 shadow-md hover:shadow-lg transition duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                    Publish Package
+                    {loading ? 'Publishing...' : 'Publish Package'}
                 </button>
             </form>
         </div>
