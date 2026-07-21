@@ -1,15 +1,29 @@
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import { packageData } from '@/data/package-data';
 import PackageCard from '@/components/PackageCard';
+import { fetchAllPackages } from '@/lib/action/service-package';
 
-function FeaturedServices() {
-    const featuredPackages = packageData.slice(0, 6);
+export default async function FeaturedServices() {
+    let featuredPackages = [];
+
+    try {
+        const res = await fetchAllPackages({ limit: 6, page: 1 });
+        if (res?.success && Array.isArray(res?.data)) {
+            featuredPackages = res.data;
+        }
+    } catch (error) {
+        console.error("Failed to fetch featured packages:", error);
+    }
+
+    if (!featuredPackages || featuredPackages.length === 0) {
+        return null;
+    }
 
     return (
-        <section className="dark:bg-slate-950 py-16 sm:py-24 transition-colors duration-300">
+        <section className="bg-white dark:bg-slate-950 py-10 transition-colors duration-300">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
+                {/* Section Header */}
                 <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10 sm:mb-12">
                     <div className="space-y-2">
                         <span className="text-xs font-bold text-cyan-600 dark:text-cyan-400 uppercase tracking-widest block">
@@ -34,15 +48,14 @@ function FeaturedServices() {
                     </div>
                 </div>
 
+                {/* Packages Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                     {featuredPackages.map((pkg) => (
-                        <PackageCard key={pkg.slug} packageData={pkg} />
+                        <PackageCard key={pkg._id || pkg.id || pkg.slug} packageData={pkg} />
                     ))}
                 </div>
 
             </div>
         </section>
     );
-};
-
-export default FeaturedServices;
+}

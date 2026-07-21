@@ -8,8 +8,6 @@ function PackageCard({ packageData }) {
         ? packageData.image[0]
         : packageData?.image;
 
-    const packageId = packageData?._id || packageData?.id;
-
     return (
         <div className="group bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl overflow-hidden hover:border-cyan-500/50 dark:hover:border-cyan-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-cyan-500/10 flex flex-col h-full relative">
 
@@ -104,7 +102,7 @@ function PackageCard({ packageData }) {
 
                 {/* Action Button */}
                 <Link
-                    href={`/packages/${packageId}`}
+                    href={`/package/${packageData._id}`}
                     className="flex gap-3 items-center justify-center w-full py-3 px-4 text-base font-semibold text-white bg-linear-to-r from-cyan-500 via-blue-600 to-cyan-500 bg-size-[200%_auto] bg-position-[0%_center] rounded-lg hover:bg-position-[100%_center] transition-all duration-500"
                 >
                     <span>View Details</span>
