@@ -16,7 +16,7 @@ const MENU_CONFIG = {
     admin: [
         { name: "Dashboard", href: "/dashboard/admin", icon: LayoutDashboard },
         { name: "Orders", href: "/dashboard/admin/orders", icon: CalendarArrowDown },
-        { name: "Manage Orders", href: "/dashboard/admin/manage-order", icon: FolderKanban },
+        { name: "Manage Package", href: "/dashboard/admin/manage-packages", icon: FolderKanban },
         { name: "Add Packages", href: "/dashboard/admin/add-packages", icon: FilePlusCorner },
         { name: "All Users", href: "/dashboard/admin/users", icon: Users },
         { name: "Profile", href: "/my-profile", icon: UserPen },
