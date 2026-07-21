@@ -2,9 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, FilePlus, User, Briefcase, Users, ChevronRight, X, FilePlus2, CreditCard, Package, Bookmark, } from "lucide-react";
+import { LayoutDashboard, Users, ChevronRight, X, Bookmark, CalendarArrowDown, FolderKanban, FilePlusCorner, UserPen, } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
-import { FcManager } from "react-icons/fc";
 import { BsFillCartCheckFill } from "react-icons/bs";
 
 const MENU_CONFIG = {
@@ -12,15 +11,15 @@ const MENU_CONFIG = {
         { name: "Dashboard", href: "/dashboard/user", icon: LayoutDashboard },
         { name: "My Orders", href: "/dashboard/user/orders", icon: BsFillCartCheckFill },
         { name: "Save Packages", href: "/dashboard/user/save-package", icon: Bookmark },
-        { name: "Profile", href: "/my-profile", icon: User },
+        { name: "Profile", href: "/my-profile", icon: UserPen },
     ],
     admin: [
         { name: "Dashboard", href: "/dashboard/admin", icon: LayoutDashboard },
-        { name: "Orders", href: "/dashboard/admin/orders", icon: Briefcase },
-        { name: "Manage Orders", href: "/dashboard/admin/manage-order", icon: FcManager },
-        { name: "Add Packages", href: "/dashboard/admin/add-packages", icon: Package },
-        { name: "Users", href: "/dashboard/admin/users", icon: Users },
-        { name: "Profile", href: "/my-profile", icon: User },
+        { name: "Orders", href: "/dashboard/admin/orders", icon: CalendarArrowDown },
+        { name: "Manage Orders", href: "/dashboard/admin/manage-order", icon: FolderKanban },
+        { name: "Add Packages", href: "/dashboard/admin/add-packages", icon: FilePlusCorner },
+        { name: "All Users", href: "/dashboard/admin/users", icon: Users },
+        { name: "Profile", href: "/my-profile", icon: UserPen },
     ],
 };
 
