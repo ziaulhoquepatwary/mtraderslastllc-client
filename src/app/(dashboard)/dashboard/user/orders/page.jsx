@@ -1,332 +1,373 @@
-import { ArrowRight, Calendar, CheckCircle, ChevronDown, ChevronLeft, ChevronRight, Clock, FileText, Filter, LayoutGrid, List, Package, Plus, Search, ShoppingBag, TrendingUp, User, X, } from "lucide-react";
-import Link from "next/link";
+'use client';
 
-export default function MyOrders() {
-    const stats = [
-        {
-            id: 1,
-            title: "Total Orders",
-            value: "24",
-            icon: ShoppingBag,
-            color: "from-cyan-500 to-blue-600",
-        },
-        {
-            id: 2,
-            title: "Active Projects",
-            value: "8",
-            icon: LayoutGrid,
-            color: "from-emerald-500 to-teal-600",
-        },
-        {
-            id: 3,
-            title: "Completed",
-            value: "12",
-            icon: CheckCircle,
-            color: "from-violet-500 to-purple-600",
-        },
-        {
-            id: 4,
-            title: "Pending",
-            value: "4",
-            icon: Clock,
-            color: "from-amber-500 to-orange-600",
-        },
-    ];
+import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { fetchMyOrders, fetchOrderDetails } from '@/lib/action/order';
 
-    const orders = [
-        {
-            id: 1,
-            title: "E-commerce Website",
-            category: "Website",
-            status: "In Progress",
-            progress: 68,
-            price: "$3,200",
-            deliveryDate: "Aug 24, 2026",
-            createdAt: "Jul 18, 2026",
-            manager: "Sarah Chen",
-            managerInitial: "SC",
-        },
-        {
-            id: 2,
-            title: "Restaurant Website",
-            category: "Website",
-            status: "Completed",
-            progress: 100,
-            price: "$1,800",
-            deliveryDate: "Jul 15, 2026",
-            createdAt: "Jul 1, 2026",
-            manager: "Mike Johnson",
-            managerInitial: "MJ",
-        },
-        {
-            id: 3,
-            title: "School Management System",
-            category: "CRM",
-            status: "Pending",
-            progress: 0,
-            price: "$5,400",
-            deliveryDate: "Sep 12, 2026",
-            createdAt: "Jul 12, 2026",
-            manager: "Emily Davis",
-            managerInitial: "ED",
-        },
-        {
-            id: 4,
-            title: "POS Software",
-            category: "Software",
-            status: "Cancelled",
-            progress: 45,
-            price: "$2,100",
-            deliveryDate: "Jul 10, 2026",
-            createdAt: "Jun 28, 2026",
-            manager: "David Kim",
-            managerInitial: "DK",
-        },
-        {
-            id: 5,
-            title: "Hospital Management",
-            category: "Software",
-            status: "In Progress",
-            progress: 82,
-            price: "$7,800",
-            deliveryDate: "Oct 5, 2026",
-            createdAt: "Jul 5, 2026",
-            manager: "Lisa Park",
-            managerInitial: "LP",
-        },
-        {
-            id: 6,
-            title: "CRM Platform",
-            category: "CRM",
-            status: "Completed",
-            progress: 100,
-            price: "$4,500",
-            deliveryDate: "Jun 30, 2026",
-            createdAt: "Jun 10, 2026",
-            manager: "James Wilson",
-            managerInitial: "JW",
-        },
-        {
-            id: 7,
-            title: "Portfolio Website",
-            category: "Website",
-            status: "Pending",
-            progress: 15,
-            price: "$1,200",
-            deliveryDate: "Aug 18, 2026",
-            createdAt: "Jul 20, 2026",
-            manager: "Anna Martinez",
-            managerInitial: "AM",
-        },
-        {
-            id: 8,
-            title: "Corporate Website",
-            category: "Website",
-            status: "In Progress",
-            progress: 55,
-            price: "$2,900",
-            deliveryDate: "Sep 1, 2026",
-            createdAt: "Jul 8, 2026",
-            manager: "Robert Chen",
-            managerInitial: "RC",
-        },
-    ];
+export default function MyOrdersPage() {
+    const [orders, setOrders] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-    const getStatusBadge = (status) => {
-        const colors = {
-            "In Progress": {
-                bg: "bg-blue-50 dark:bg-blue-950/40",
-                text: "text-blue-600 dark:text-blue-400",
-                dot: "bg-blue-500",
-            },
-            Completed: {
-                bg: "bg-emerald-50 dark:bg-emerald-950/40",
-                text: "text-emerald-600 dark:text-emerald-400",
-                dot: "bg-emerald-500",
-            },
-            Pending: {
-                bg: "bg-amber-50 dark:bg-amber-950/40",
-                text: "text-amber-600 dark:text-amber-400",
-                dot: "bg-amber-500",
-            },
-            Cancelled: {
-                bg: "bg-rose-50 dark:bg-rose-950/40",
-                text: "text-rose-600 dark:text-rose-400",
-                dot: "bg-rose-500",
-            },
+    // Active Tab State: 'active' or 'completed'
+    const [activeTab, setActiveTab] = useState('active');
+
+    // Modal States
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedOrder, setSelectedOrder] = useState(null);
+    const [modalLoading, setModalLoading] = useState(false);
+
+    useEffect(() => {
+        const getMyOrders = async () => {
+            try {
+                setLoading(true);
+                const res = await fetchMyOrders();
+                setOrders(res?.data || res || []);
+            } catch (err) {
+                setError('Failed to load orders. Please try again.');
+            } finally {
+                setLoading(false);
+            }
         };
-        return colors[status] || colors["Pending"];
+
+        getMyOrders();
+    }, []);
+
+    const handleViewOrderDetails = async (orderId) => {
+        setIsModalOpen(true);
+        setModalLoading(true);
+        try {
+            const res = await fetchOrderDetails(orderId);
+            setSelectedOrder(res?.data || res);
+        } catch (err) {
+            console.error('Error fetching order details:', err);
+        } finally {
+            setModalLoading(false);
+        }
     };
 
+    const closeModal = () => {
+        setIsModalOpen(false);
+        setSelectedOrder(null);
+    };
+
+    // Helper for Status Badge Styling using your color system
+    const getStatusBadge = (status) => {
+        const normalizedStatus = status?.toLowerCase();
+        switch (normalizedStatus) {
+            case 'completed':
+                return 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20';
+            case 'in_progress':
+            case 'confirmed':
+                return 'bg-[#06B6D4]/10 text-[#06B6D4] dark:text-[#22D3EE] border-[#06B6D4]/20';
+            case 'contacted':
+            case 'pending':
+                return 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20';
+            case 'cancelled':
+                return 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/20';
+            default:
+                return 'bg-slate-100 dark:bg-slate-800 text-[#64748B] dark:text-[#94A3B8] border-slate-200 dark:border-slate-700';
+        }
+    };
+
+    // Filter orders based on selected tab
+    const filteredOrders = orders.filter((order) => {
+        const isCompleted = order.status?.toLowerCase() === 'completed';
+        return activeTab === 'completed' ? isCompleted : !isCompleted;
+    });
+
+    if (loading) {
+        return (
+            <div className="min-h-screen bg-[#FFFFFF] dark:bg-[#020617] flex items-center justify-center">
+                <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-[#06B6D4]"></div>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="min-h-[60vh] bg-[#FFFFFF] dark:bg-[#020617] flex items-center justify-center text-rose-500 font-medium">
+                {error}
+            </div>
+        );
+    }
+
     return (
-        <div className="min-h-screen bg-white dark:bg-slate-950 ">
+        <div className="min-h-screen bg-[#FFFFFF] dark:bg-[#020617] text-[#1E293B] dark:text-[#F8FAFC] transition-colors duration-200">
             <div className="mx-auto">
-                {/* Page Heading */}
-                <div className="mb-8 flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
-                    <div>
-                        <h1 className="text-3xl font-bold text-slate-900 dark:text-white md:text-4xl">
-                            My Orders
-                        </h1>
-                        <p className="mt-1 text-slate-600 dark:text-slate-400">
-                            Track all your website and software development orders in one
-                            place.
+                {/* Header */}
+                <div className="mb-8">
+                    <h1 className="text-3xl font-bold text-[#0F172A] dark:text-[#FFFFFF]">
+                        My Orders
+                    </h1>
+                    <p className="text-[#64748B] dark:text-[#94A3B8] text-sm mt-1">
+                        Manage and track all your active and past orders.
+                    </p>
+                </div>
+
+                {/* Tab Buttons */}
+                <div className="flex space-x-3 mb-6 border-b border-slate-200 dark:border-slate-800 pb-3">
+                    <button
+                        onClick={() => setActiveTab('active')}
+                        className={`px-5 py-2.5 rounded-lg font-semibold text-sm transition-all duration-200 ${activeTab === 'active'
+                            ? 'bg-gradient-to-r from-[#06B6D4] to-[#2563EB] text-white shadow-md'
+                            : 'bg-slate-100 dark:bg-slate-800/60 text-[#64748B] dark:text-[#94A3B8] hover:bg-slate-200 dark:hover:bg-slate-800'
+                            }`}
+                    >
+                        Active Orders ({orders.filter((o) => o.status?.toLowerCase() !== 'completed').length})
+                    </button>
+
+                    <button
+                        onClick={() => setActiveTab('completed')}
+                        className={`px-5 py-2.5 rounded-lg font-semibold text-sm transition-all duration-200 ${activeTab === 'completed'
+                            ? 'bg-gradient-to-r from-[#06B6D4] to-[#2563EB] text-white shadow-md'
+                            : 'bg-slate-100 dark:bg-slate-800/60 text-[#64748B] dark:text-[#94A3B8] hover:bg-slate-200 dark:hover:bg-slate-800'
+                            }`}
+                    >
+                        Completed Orders ({orders.filter((o) => o.status?.toLowerCase() === 'completed').length})
+                    </button>
+                </div>
+
+                {/* Orders Table Container */}
+                {filteredOrders.length === 0 ? (
+                    <div className="text-center py-16 bg-slate-50 dark:bg-slate-900/50 rounded-2xl border border-dashed border-slate-200 dark:border-slate-800">
+                        <p className="text-[#64748B] dark:text-[#94A3B8] text-base">
+                            No {activeTab} orders found.
                         </p>
                     </div>
-                    <Link href={'/package'} className="flex items-center gap-2 rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 px-5 py-2.5 font-semibold text-white transition-all duration-200 hover:shadow-lg hover:shadow-cyan-500/30 dark:from-cyan-400 dark:to-blue-500">
-                        <Plus className="h-5 w-5" />
-                        Find New Package
-                    </Link>
-                </div>
+                ) : (
+                    <div className="w-full overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                        <table className="w-full text-left text-sm border-collapse min-w-[850px]">
+                            {/* Table Header */}
+                            <thead className="bg-slate-50 dark:bg-slate-900/80 text-[#64748B] dark:text-[#94A3B8] uppercase text-xs font-semibold tracking-wider border-b border-slate-200 dark:border-slate-800">
+                                <tr>
+                                    <th scope="col" className="px-6 py-4">Package</th>
+                                    <th scope="col" className="px-6 py-4">Category</th>
+                                    <th scope="col" className="px-6 py-4">Price</th>
+                                    <th scope="col" className="px-6 py-4">Order Date</th>
+                                    <th scope="col" className="px-6 py-4">Status</th>
+                                    <th scope="col" className="px-6 py-4 text-center">Actions</th>
+                                </tr>
+                            </thead>
 
-                {/* Statistics Cards */}
-                <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                    {stats.map((stat) => {
-                        const Icon = stat.icon;
-                        return (
-                            <div
-                                key={stat.id}
-                                className="group relative overflow-hidden rounded-2xl border border-slate-100 bg-white p-5 transition-all duration-200 hover:shadow-md hover:shadow-slate-200/50 dark:border-slate-900 dark:bg-slate-900 dark:hover:shadow-slate-800/50"
-                            >
-                                <div className="flex items-start justify-between">
-                                    <div>
-                                        <p className="text-sm font-medium text-slate-600 dark:text-slate-400">
-                                            {stat.title}
-                                        </p>
-                                        <p className="mt-1 text-2xl font-bold text-slate-900 dark:text-white">
-                                            {stat.value}
-                                        </p>
-                                    </div>
-                                    <div
-                                        className={`flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br ${stat.color} text-white shadow-lg shadow-${stat.color.split(" ")[1]?.replace("-", "") || "cyan"}-500/20`}
+                            {/* Table Body */}
+                            <tbody className="divide-y divide-slate-200 dark:divide-slate-800 bg-[#FFFFFF] dark:bg-[#020617]">
+                                {filteredOrders.map((order) => (
+                                    <tr
+                                        key={order._id}
+                                        className="hover:bg-slate-50/50 dark:hover:bg-slate-900/30 transition-colors"
                                     >
-                                        <Icon className="h-5 w-5" />
-                                    </div>
-                                </div>
-                                <div className="absolute -right-4 -top-4 h-16 w-16 rounded-full bg-gradient-to-br from-cyan-500/5 to-blue-600/5 blur-2xl transition-all duration-200 group-hover:scale-150 dark:from-cyan-400/5 dark:to-blue-500/5" />
-                            </div>
-                        );
-                    })}
-                </div>
+                                        {/* Package Title & Image */}
+                                        <td className="px-6 py-4 whitespace-nowrap">
+                                            <div className="flex items-center space-x-3">
+                                                <img
+                                                    src={order.image || '/placeholder.jpg'}
+                                                    alt={order.title}
+                                                    className="w-12 h-12 rounded-lg object-cover flex-shrink-0 border border-slate-200 dark:border-slate-800"
+                                                />
+                                                <span className="font-semibold text-[#0F172A] dark:text-[#FFFFFF] truncate max-w-[220px]">
+                                                    {order.title}
+                                                </span>
+                                            </div>
+                                        </td>
 
-                {/* Orders List */}
-                <div className="mb-8 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-2">
-                    {orders.map((order) => {
-                        const statusBadge = getStatusBadge(order.status);
-                        return (
-                            <div
-                                key={order.id}
-                                className="group rounded-2xl border border-slate-100 bg-white p-5 transition-all duration-200 hover:shadow-lg hover:shadow-slate-200/50 dark:border-slate-900 dark:bg-slate-900 dark:hover:shadow-slate-800/50"
-                            >
-                                <div className="flex items-start justify-between">
-                                    <div>
-                                        <h3 className="text-lg font-bold text-slate-900 dark:text-white">
-                                            {order.title}
-                                        </h3>
-                                        <p className="mt-0.5 text-sm text-slate-500 dark:text-slate-400">
+                                        {/* Category */}
+                                        <td className="px-6 py-4 whitespace-nowrap text-[#64748B] dark:text-[#94A3B8]">
                                             {order.category}
-                                        </p>
-                                    </div>
-                                    <span
-                                        className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium ${statusBadge.bg} ${statusBadge.text}`}
-                                    >
-                                        <span
-                                            className={`h-1.5 w-1.5 rounded-full ${statusBadge.dot}`}
-                                        />
-                                        {order.status}
-                                    </span>
-                                </div>
+                                        </td>
 
-                                {/* Progress */}
-                                <div className="mt-4">
-                                    <div className="flex items-center justify-between text-sm">
-                                        <span className="text-slate-600 dark:text-slate-400">
-                                            Progress
-                                        </span>
-                                        <span className="font-medium text-slate-900 dark:text-white">
-                                            {order.progress}%
-                                        </span>
-                                    </div>
-                                    <div className="mt-1.5 h-2 w-full overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
-                                        <div
-                                            className="h-full rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 transition-all duration-500 dark:from-cyan-400 dark:to-blue-500"
-                                            style={{ width: `${order.progress}%` }}
-                                        />
-                                    </div>
-                                </div>
+                                        {/* Price */}
+                                        <td className="px-6 py-4 whitespace-nowrap font-bold text-[#0F172A] dark:text-[#FFFFFF]">
+                                            ${order.price}
+                                        </td>
 
-                                {/* Details */}
-                                <div className="mt-4 grid grid-cols-2 gap-2 text-sm">
-                                    <div>
-                                        <span className="text-slate-500 dark:text-slate-400">
-                                            Price
-                                        </span>
-                                        <p className="font-semibold text-slate-900 dark:text-white">
-                                            {order.price}
-                                        </p>
-                                    </div>
-                                    <div>
-                                        <span className="text-slate-500 dark:text-slate-400">
-                                            Delivery
-                                        </span>
-                                        <p className="font-medium text-slate-900 dark:text-white">
-                                            {order.deliveryDate}
-                                        </p>
-                                    </div>
-                                    <div className="col-span-2">
-                                        <span className="text-slate-500 dark:text-slate-400">
-                                            Created
-                                        </span>
-                                        <p className="font-medium text-slate-900 dark:text-white">
-                                            {order.createdAt}
-                                        </p>
-                                    </div>
-                                </div>
+                                        {/* Date */}
+                                        <td className="px-6 py-4 whitespace-nowrap text-[#64748B] dark:text-[#94A3B8]">
+                                            {new Date(order.createdAt?.$date || order.createdAt).toLocaleDateString('en-US', {
+                                                year: 'numeric',
+                                                month: 'short',
+                                                day: 'numeric',
+                                            })}
+                                        </td>
 
-                                {/* Manager & Action */}
-                                <div className="mt-4 flex items-center justify-between border-t border-slate-100 pt-4 dark:border-slate-800">
-                                    <div className="flex items-center gap-2">
-                                        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 text-xs font-medium text-white">
-                                            {order.managerInitial}
-                                        </div>
-                                        <span className="text-sm text-slate-600 dark:text-slate-400">
-                                            {order.manager}
-                                        </span>
-                                    </div>
-                                    <button className="flex items-center gap-1.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 px-4 py-1.5 text-sm font-medium text-white transition-all duration-200 hover:shadow-lg hover:shadow-cyan-500/30 dark:from-cyan-400 dark:to-blue-500">
-                                        View Details
-                                        <ArrowRight className="h-4 w-4" />
-                                    </button>
-                                </div>
+                                        {/* Status Badge */}
+                                        <td className="px-6 py-4 whitespace-nowrap">
+                                            <span
+                                                className={`inline-block px-3 py-1 rounded-full text-xs font-semibold capitalize border ${getStatusBadge(
+                                                    order.status
+                                                )}`}
+                                            >
+                                                {order.status?.replace('_', ' ')}
+                                            </span>
+                                        </td>
+
+                                        {/* Action Buttons */}
+                                        <td className="px-6 py-4 whitespace-nowrap text-center">
+                                            <div className="flex items-center justify-center space-x-2">
+                                                <button
+                                                    onClick={() => handleViewOrderDetails(order._id)}
+                                                    className="px-3.5 py-1.5 bg-gradient-to-r from-[#06B6D4] to-[#2563EB] hover:opacity-90 text-white font-medium text-xs rounded-lg transition-all shadow-sm"
+                                                >
+                                                    View Details
+                                                </button>
+
+                                                <Link
+                                                    href={`/package/${order.packageId}`}
+                                                    className="px-3.5 py-1.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-[#1E293B] dark:text-[#F8FAFC] font-medium text-xs rounded-lg transition-colors border border-slate-200 dark:border-slate-700"
+                                                >
+                                                    View Package
+                                                </Link>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                )}
+            </div>
+
+            {/* ORDER DETAILS MODAL */}
+            {isModalOpen && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm">
+                    <div className="bg-[#FFFFFF] dark:bg-[#020617] border border-slate-200 dark:border-slate-800 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 relative text-[#1E293B] dark:text-[#F8FAFC]">
+                        {/* Close Button */}
+                        <button
+                            onClick={closeModal}
+                            className="absolute top-4 right-4 text-[#64748B] hover:text-[#0F172A] dark:text-[#94A3B8] dark:hover:text-[#FFFFFF] text-xl font-bold w-8 h-8 flex items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                        >
+                            &times;
+                        </button>
+
+                        <h2 className="text-xl font-bold text-[#0F172A] dark:text-[#FFFFFF] mb-5 border-b border-slate-200 dark:border-slate-800 pb-3">
+                            Order Specification
+                        </h2>
+
+                        {modalLoading ? (
+                            <div className="py-12 flex justify-center">
+                                <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-[#06B6D4]"></div>
                             </div>
-                        );
-                    })}
-                </div>
+                        ) : selectedOrder ? (
+                            <div className="space-y-5">
+                                {/* Package Overview */}
+                                <div className="flex gap-4 items-center bg-slate-50 dark:bg-slate-900/60 p-4 rounded-xl border border-slate-200 dark:border-slate-800">
+                                    <img
+                                        src={selectedOrder.image}
+                                        alt={selectedOrder.title}
+                                        className="w-20 h-20 object-cover rounded-lg border border-slate-200 dark:border-slate-800"
+                                    />
+                                    <div>
+                                        <span className="text-xs font-semibold text-[#06B6D4] dark:text-[#22D3EE] uppercase tracking-wider">
+                                            {selectedOrder.category}
+                                        </span>
+                                        <h3 className="font-bold text-[#0F172A] dark:text-[#FFFFFF] text-base mt-0.5">
+                                            {selectedOrder.title}
+                                        </h3>
+                                        <p className="text-[#2563EB] dark:text-[#06B6D4] font-bold text-lg mt-1">
+                                            ${selectedOrder.price}
+                                        </p>
+                                    </div>
+                                </div>
 
-                {/* Pagination */}
-                <div className="flex items-center justify-between border-t border-slate-100 pt-6 dark:border-slate-900">
-                    <p className="text-sm text-slate-600 dark:text-slate-400">
-                        Showing <span className="font-medium text-slate-900 dark:text-white">1-8</span> of{" "}
-                        <span className="font-medium text-slate-900 dark:text-white">24</span> orders
-                    </p>
-                    <div className="flex items-center gap-1">
-                        <button className="flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 text-slate-600 transition-colors hover:bg-slate-50 dark:border-slate-800 dark:text-slate-400 dark:hover:bg-slate-800">
-                            <ChevronLeft className="h-4 w-4" />
-                        </button>
-                        <button className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-sm font-semibold text-white dark:from-cyan-400 dark:to-blue-500">
-                            1
-                        </button>
-                        <button className="flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-50 dark:border-slate-800 dark:text-slate-400 dark:hover:bg-slate-800">
-                            2
-                        </button>
-                        <button className="flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-50 dark:border-slate-800 dark:text-slate-400 dark:hover:bg-slate-800">
-                            3
-                        </button>
-                        <button className="flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 text-slate-600 transition-colors hover:bg-slate-50 dark:border-slate-800 dark:text-slate-400 dark:hover:bg-slate-800">
-                            <ChevronRight className="h-4 w-4" />
-                        </button>
+                                {/* Status & Payment Grid */}
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div className="p-3.5 bg-slate-50 dark:bg-slate-900/60 rounded-xl border border-slate-200 dark:border-slate-800">
+                                        <p className="text-xs text-[#64748B] dark:text-[#94A3B8] uppercase font-medium">Order Status</p>
+                                        <span
+                                            className={`inline-block mt-2 px-3 py-0.5 rounded-full text-xs font-semibold border capitalize ${getStatusBadge(
+                                                selectedOrder.status
+                                            )}`}
+                                        >
+                                            {selectedOrder.status?.replace('_', ' ')}
+                                        </span>
+                                    </div>
+                                    <div className="p-3.5 bg-slate-50 dark:bg-slate-900/60 rounded-xl border border-slate-200 dark:border-slate-800">
+                                        <p className="text-xs text-[#64748B] dark:text-[#94A3B8] uppercase font-medium">Payment Status</p>
+                                        <span className="inline-block mt-2 px-3 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 capitalize">
+                                            {selectedOrder.paymentStatus}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                {/* Delivery Information */}
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-t border-slate-200 dark:border-slate-800 pt-4">
+                                    <div>
+                                        <p className="text-xs text-[#64748B] dark:text-[#94A3B8]">Delivery Time</p>
+                                        <p className="text-sm font-semibold text-[#0F172A] dark:text-[#FFFFFF] mt-0.5">
+                                            {selectedOrder.deliveryTime} Days
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <p className="text-xs text-[#64748B] dark:text-[#94A3B8]">Estimated Delivery Date</p>
+                                        <p className="text-sm font-semibold text-[#0F172A] dark:text-[#FFFFFF] mt-0.5">
+                                            {new Date(
+                                                selectedOrder.deliveryDate?.$date || selectedOrder.deliveryDate
+                                            ).toLocaleString('en-US', {
+                                                dateStyle: 'medium',
+                                                timeStyle: 'short',
+                                            })}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                {/* Customer Information */}
+                                <div className="border-t border-slate-200 dark:border-slate-800 pt-4 space-y-2">
+                                    <h4 className="text-xs uppercase font-bold text-[#64748B] dark:text-[#94A3B8] tracking-wider">
+                                        Customer Information
+                                    </h4>
+                                    <div className="text-sm grid grid-cols-1 md:grid-cols-2 gap-3 pt-1">
+                                        <div>
+                                            <span className="text-[#64748B] dark:text-[#94A3B8]">Name: </span>
+                                            <span className="font-semibold text-[#0F172A] dark:text-[#FFFFFF]">
+                                                {selectedOrder.userName}
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <span className="text-[#64748B] dark:text-[#94A3B8]">Email: </span>
+                                            <span className="font-semibold text-[#0F172A] dark:text-[#FFFFFF]">
+                                                {selectedOrder.userEmail}
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <span className="text-[#64748B] dark:text-[#94A3B8]">Phone: </span>
+                                            <span className="font-semibold text-[#0F172A] dark:text-[#FFFFFF]">
+                                                {selectedOrder.userPhone}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Resource Link */}
+                                {selectedOrder.resourceLink && (
+                                    <div className="border-t border-slate-200 dark:border-slate-800 pt-4">
+                                        <p className="text-xs text-[#64748B] dark:text-[#94A3B8] mb-1">Attached Documentation / Link</p>
+                                        <a
+                                            href={selectedOrder.resourceLink}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="inline-flex items-center text-sm text-[#06B6D4] dark:text-[#22D3EE] hover:underline font-semibold break-all"
+                                        >
+                                            Access Project Resources &rarr;
+                                        </a>
+                                    </div>
+                                )}
+                            </div>
+                        ) : (
+                            <p className="text-center text-rose-500 py-6">Unable to load details.</p>
+                        )}
+
+                        {/* Modal Footer */}
+                        <div className="mt-6 border-t border-slate-200 dark:border-slate-800 pt-4 text-right">
+                            <button
+                                onClick={closeModal}
+                                className="px-5 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-[#1E293B] dark:text-[#F8FAFC] font-semibold rounded-lg text-sm transition-colors"
+                            >
+                                Close
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
+            )}
         </div>
     );
 }

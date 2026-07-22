@@ -7,6 +7,10 @@ export const fetchSavedPackages = () => {
     return apiHandler(() => axios.get(`${API_URL}/saved`, { withCredentials: true }));
 };
 
+export const checkSavedPackage = (packageId) => {
+    return apiHandler(() => axios.get(`${API_URL}/check/${packageId}`, { withCredentials: true }));
+};
+
 export const toggleSavePackage = (packageId) => {
     return apiHandler(() => axios.post(`${API_URL}/save/${packageId}`, {}, { withCredentials: true }));
 };

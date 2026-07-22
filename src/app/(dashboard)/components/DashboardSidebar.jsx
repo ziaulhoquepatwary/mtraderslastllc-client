@@ -10,7 +10,6 @@ const MENU_CONFIG = {
     user: [
         { name: "Dashboard", href: "/dashboard/user", icon: LayoutDashboard },
         { name: "My Orders", href: "/dashboard/user/orders", icon: BsFillCartCheckFill },
-        { name: "Save Packages", href: "/dashboard/user/save-package", icon: Bookmark },
         { name: "Profile", href: "/my-profile", icon: UserPen },
     ],
     admin: [

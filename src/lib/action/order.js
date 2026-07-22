@@ -9,9 +9,9 @@ export const fetchMyOrders = () => {
     );
 };
 
-export const fetchMyOrderDetails = (orderId) => {
+export const fetchOrderDetails = (orderId) => {
     return apiHandler(() =>
-        axios.get(`${API_URL}/my-order-details/${orderId}`, { withCredentials: true })
+        axios.get(`${API_URL}/order-details/${orderId}`, { withCredentials: true })
     );
 };
 
