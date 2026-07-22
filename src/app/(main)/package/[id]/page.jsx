@@ -127,7 +127,7 @@ export default async function PackageDetailsPage({ params }) {
 
                             {/* CTA Action */}
                             <div className="space-y-3">
-                                <OrderPackageModal packageId={pkg._id} packageTitle={pkg.title} />
+                                <OrderPackageModal packageData={pkg} />
                                 <div className="flex items-center justify-center gap-1.5 text-xs text-[#9A9488]">
                                     <ShieldCheck className="w-4 h-4 text-cyan-500" />
                                     <span>100% satisfaction guaranteed & dedicated support</span>
