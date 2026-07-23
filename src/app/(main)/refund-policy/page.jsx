@@ -1,7 +1,5 @@
-'use client';
 
-import React from 'react';
-import { AlertTriangle, CheckCircle, Clock, MessageCircle, Mail, Phone, ArrowRight, HelpCircle } from 'lucide-react';
+import { AlertTriangle, CheckCircle, Clock, MessageCircle, Mail, Phone, ArrowRight, HelpCircle, Calendar, RotateCcw } from 'lucide-react';
 
 const RefundPolicy = () => {
     return (
@@ -29,9 +27,9 @@ const RefundPolicy = () => {
                     <div className="flex gap-4">
                         <AlertTriangle className="w-6 h-6 text-red-600 dark:text-red-400 flex-shrink-0 mt-0.5" />
                         <div>
-                            <h2 className="font-bold text-red-900 dark:text-red-100 mb-2 text-lg">Important: Non-Refundable Services</h2>
+                            <h2 className="font-bold text-red-900 dark:text-red-100 mb-2 text-lg">Important: Non-Refundable Services (With Delivery Guarantee Exception)</h2>
                             <p className="text-sm text-red-800 dark:text-red-200">
-                                M Traders Last LLC provides custom service-based work. Once an order is placed and work is initiated, all services are <strong>non-refundable</strong>. Please review all details and contact us with questions <strong>before purchasing</strong>.
+                                M Traders Last LLC provides custom service-based work. Once an order is placed and work is initiated, all services are <strong>non-refundable</strong> — with ONE exception: if we fail to deliver your project by the promised delivery date, you can request a refund and receive it within hours. Please review all details and contact us with questions <strong>before purchasing</strong>.
                             </p>
                         </div>
                     </div>
@@ -90,7 +88,7 @@ const RefundPolicy = () => {
                         General Refund Policy
                     </h2>
                     <p className="text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
-                        <strong className="font-semibold text-slate-900 dark:text-slate-100">All products and services sold by M Traders Last LLC are non-refundable once ordered.</strong> This applies to:
+                        <strong className="font-semibold text-slate-900 dark:text-slate-100">All products and services sold by M Traders Last LLC are non-refundable once ordered and work has commenced.</strong> This applies to:
                     </p>
                     <ul className="space-y-2 mb-6 text-slate-600 dark:text-slate-400">
                         <li className="flex gap-3">
@@ -118,9 +116,109 @@ const RefundPolicy = () => {
                             <span>All other products and services</span>
                         </li>
                     </ul>
-                    <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-                        This policy applies <strong className="font-semibold text-slate-900 dark:text-slate-100">regardless of whether you are satisfied with the final result, whether work has been completed, or any other circumstances</strong>.
+                    <p className="text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+                        This policy applies <strong className="font-semibold text-slate-900 dark:text-slate-100">regardless of whether you are satisfied with the final result or any other circumstances</strong> — EXCEPT in the case of a missed delivery deadline, which has its own guarantee (see section below).
                     </p>
+                    <div className="bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
+                        <p className="text-sm text-green-800 dark:text-green-200">
+                            <strong className="font-semibold">The One Exception:</strong> If we fail to deliver your project by the agreed delivery date, you have the right to cancel the order and request a full refund. See "Delivery Guarantee & Late Delivery Refund" section below for details.
+                        </p>
+                    </div>
+                </section>
+
+                <div className="border-t border-slate-100 dark:border-slate-900"></div>
+
+                {/* 2.5. Delivery Guarantee & Late Delivery Refund */}
+                <section>
+                    <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-50 mb-4 flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-md bg-gradient-to-r from-cyan-500 to-blue-600 text-white flex items-center justify-center font-bold flex-shrink-0 text-sm">
+                            2A
+                        </div>
+                        Delivery Guarantee & Late Delivery Refund
+                    </h2>
+                    <p className="text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
+                        We are committed to meeting your delivery deadlines. If we fail to deliver your project or service by the agreed date, you have the option to request a full refund without any questions asked.
+                    </p>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                        <div className="bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 rounded-lg p-5">
+                            <h4 className="font-bold text-green-900 dark:text-green-100 mb-3 flex items-center gap-2">
+                                <Calendar className="w-5 h-5" />
+                                How It Works
+                            </h4>
+                            <ul className="space-y-2 text-sm text-green-800 dark:text-green-200">
+                                <li className="flex gap-3">
+                                    <CheckCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
+                                    <span>You place an order with an agreed delivery date</span>
+                                </li>
+                                <li className="flex gap-3">
+                                    <CheckCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
+                                    <span>If we miss the deadline, you can request a refund</span>
+                                </li>
+                                <li className="flex gap-3">
+                                    <CheckCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
+                                    <span>Refund is processed within hours</span>
+                                </li>
+                                <li className="flex gap-3">
+                                    <CheckCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
+                                    <span>Money returned to your account automatically</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-lg p-5">
+                            <h4 className="font-bold text-blue-900 dark:text-blue-100 mb-3 flex items-center gap-2">
+                                <RotateCcw className="w-5 h-5" />
+                                Requesting a Refund
+                            </h4>
+                            <ul className="space-y-2 text-sm text-blue-800 dark:text-blue-200">
+                                <li className="flex gap-3">
+                                    <CheckCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
+                                    <span>Contact us after the delivery date passes</span>
+                                </li>
+                                <li className="flex gap-3">
+                                    <CheckCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
+                                    <span>No explanation or justification needed</span>
+                                </li>
+                                <li className="flex gap-3">
+                                    <CheckCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
+                                    <span>We process the refund within 24 hours</span>
+                                </li>
+                                <li className="flex gap-3">
+                                    <CheckCircle className="w-4 h-4 flex-shrink-0 mt-0.5" />
+                                    <span>Full amount credited back to your payment method</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div className="bg-slate-50 dark:bg-slate-900 rounded-lg p-5 border border-slate-100 dark:border-slate-800 mb-6">
+                        <h4 className="font-bold text-slate-900 dark:text-slate-100 mb-3">What Qualifies as "Late Delivery":</h4>
+                        <ul className="space-y-2 text-sm text-slate-600 dark:text-slate-400">
+                            <li className="flex gap-3">
+                                <span className="text-cyan-600 dark:text-cyan-400">✓</span>
+                                <span>Delivery date has passed and you have not received the complete project/service</span>
+                            </li>
+                            <li className="flex gap-3">
+                                <span className="text-cyan-600 dark:text-cyan-400">✓</span>
+                                <span>Project is not accessible or usable (e.g., website not live, bot not functioning)</span>
+                            </li>
+                            <li className="flex gap-3">
+                                <span className="text-cyan-600 dark:text-cyan-400">✓</span>
+                                <span>We have not communicated progress updates or revised timeline</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 rounded-lg p-5">
+                        <h4 className="font-bold text-amber-900 dark:text-amber-100 mb-2">Important Notes:</h4>
+                        <ul className="space-y-2 text-sm text-amber-800 dark:text-amber-200">
+                            <li>• The delivery date must be clearly stated in your order or service agreement</li>
+                            <li>• If delays are caused by <strong>client-side factors</strong> (missing information, delayed approvals, scope changes), the deadline may be extended accordingly</li>
+                            <li>• We will communicate any potential delays as soon as they are identified</li>
+                            <li>• Extensions are agreed upon in writing before the original deadline passes</li>
+                        </ul>
+                    </div>
                 </section>
 
                 <div className="border-t border-slate-100 dark:border-slate-900"></div>
@@ -160,7 +258,7 @@ const RefundPolicy = () => {
                     </ul>
                     <div className="bg-slate-50 dark:bg-slate-900 rounded-lg p-4 border border-slate-100 dark:border-slate-800">
                         <p className="text-sm text-slate-600 dark:text-slate-400">
-                            <strong className="font-semibold text-slate-900 dark:text-slate-100">Once any of these milestones occurs, no refund will be issued</strong>, regardless of whether you decide to continue with the project or change your mind about proceeding.
+                            <strong className="font-semibold text-slate-900 dark:text-slate-100">Once any of these milestones occurs, the standard non-refund policy applies</strong>, UNLESS we fail to meet the delivery deadline — in which case you can request a refund as described above.
                         </p>
                     </div>
                 </section>
@@ -176,7 +274,7 @@ const RefundPolicy = () => {
                         What You Can Do Instead (Alternatives to Refunds)
                     </h2>
                     <p className="text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
-                        While we cannot offer refunds, we provide alternatives to ensure you get the service you need:
+                        While we cannot offer refunds for dissatisfaction, we provide alternatives to ensure you get the service you need:
                     </p>
 
                     <div className="space-y-4">
