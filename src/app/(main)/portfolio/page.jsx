@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 
 export default function PortfolioPage() {
     const tags = ["All", "Featured", "Enterprise", "SaaS Platform"];
@@ -16,6 +16,7 @@ export default function PortfolioPage() {
             client: "Pixer LLC, US",
             tools: ["React", "Next.js", "Laravel", "Tailwind CSS", "TypeScript"],
             image: "/portfolio/portfolio-1.png",
+            link: "https://github.com/ziaulhoquepatwary",
             tag: "Featured"
         },
         {
@@ -24,6 +25,7 @@ export default function PortfolioPage() {
             client: "Pickbazar Global",
             tools: ["Next.js", "React", "GraphQL", "REST API", "Tailwind CSS"],
             image: "/portfolio/portfolio-2.png",
+            link: "https://github.com/ziaulhoquepatwary",
             tag: "Enterprise"
         },
         {
@@ -32,6 +34,7 @@ export default function PortfolioPage() {
             client: "ChawkBazar Group",
             tools: ["React", "Next.js", "Laravel API", "Tailwind CSS"],
             image: "/portfolio/portfolio-3.png",
+            link: "https://github.com/ziaulhoquepatwary",
             tag: "SaaS Platform"
         },
         {
@@ -40,6 +43,7 @@ export default function PortfolioPage() {
             client: "NovaCart Inc, UK",
             tools: ["React", "Next.js", "Node.js", "Tailwind CSS", "TypeScript"],
             image: "/portfolio/portfolio-4.png",
+            link: "https://github.com/ziaulhoquepatwary",
             tag: "E-commerce"
         },
         {
@@ -48,6 +52,7 @@ export default function PortfolioPage() {
             client: "Vaultly Financial, US",
             tools: ["React", "Redux", "Node.js", "Express", "PostgreSQL"],
             image: "/portfolio/portfolio-5.png",
+            link: "https://github.com/ziaulhoquepatwary",
             tag: "Fintech"
         },
         {
@@ -56,6 +61,7 @@ export default function PortfolioPage() {
             client: "MedLink Health Systems",
             tools: ["Next.js", "React", "Node.js", "MongoDB", "WebRTC"],
             image: "/portfolio/portfolio-6.png",
+            link: "https://github.com/ziaulhoquepatwary",
             tag: "Healthcare"
         },
         {
@@ -64,6 +70,7 @@ export default function PortfolioPage() {
             client: "EduSphere Learning, CA",
             tools: ["React", "Next.js", "GraphQL", "Tailwind CSS", "TypeScript"],
             image: "/portfolio/portfolio-7.png",
+            link: "https://github.com/ziaulhoquepatwary",
             tag: "EdTech"
         },
         {
@@ -72,6 +79,7 @@ export default function PortfolioPage() {
             client: "RoutEx Logistics, DE",
             tools: ["React", "Node.js", "Express", "MongoDB", "Socket.io"],
             image: "/portfolio/portfolio-8.png",
+            link: "https://github.com/ziaulhoquepatwary",
             tag: "Logistics"
         },
         {
@@ -80,6 +88,7 @@ export default function PortfolioPage() {
             client: "Streemly Media, US",
             tools: ["Next.js", "React", "Node.js", "Tailwind CSS", "WebSockets"],
             image: "/portfolio/portfolio-9.png",
+            link: "https://github.com/ziaulhoquepatwary",
             tag: "Media"
         },
         {
@@ -88,6 +97,7 @@ export default function PortfolioPage() {
             client: "PropVista Realty, AU",
             tools: ["React", "Next.js", "Laravel", "Tailwind CSS", "MapBox"],
             image: "/portfolio/portfolio-10.png",
+            link: "https://github.com/ziaulhoquepatwary",
             tag: "Real Estate"
         },
         {
@@ -96,6 +106,7 @@ export default function PortfolioPage() {
             client: "FreshCrate Inc, US",
             tools: ["React Native", "React", "Node.js", "GraphQL", "MongoDB"],
             image: "/portfolio/portfolio-11.png",
+            link: "https://github.com/ziaulhoquepatwary",
             tag: "On-Demand"
         },
         {
@@ -104,6 +115,7 @@ export default function PortfolioPage() {
             client: "TaskForge Software, CA",
             tools: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Prisma"],
             image: "/portfolio/portfolio-12.png",
+            link: "https://github.com/ziaulhoquepatwary",
             tag: "SaaS Platform"
         },
         {
@@ -112,6 +124,7 @@ export default function PortfolioPage() {
             client: "Cinemate Entertainment",
             tools: ["React", "Next.js", "Laravel API", "Tailwind CSS"],
             image: "/portfolio/portfolio-13.png",
+            link: "https://github.com/ziaulhoquepatwary",
             tag: "Entertainment"
         },
         {
@@ -120,6 +133,7 @@ export default function PortfolioPage() {
             client: "WorkNest Technologies",
             tools: ["React", "Node.js", "Socket.io", "MongoDB", "TypeScript"],
             image: "/portfolio/portfolio-14.png",
+            link: "https://github.com/ziaulhoquepatwary",
             tag: "Enterprise"
         },
         {
@@ -128,6 +142,7 @@ export default function PortfolioPage() {
             client: "TrailBlaze Travel, UK",
             tools: ["Next.js", "React", "GraphQL", "Tailwind CSS", "TypeScript"],
             image: "/portfolio/portfolio-15.png",
+            link: "https://github.com/ziaulhoquepatwary",
             tag: "Travel"
         },
         {
@@ -136,6 +151,7 @@ export default function PortfolioPage() {
             client: "FitPulse Health, US",
             tools: ["React Native", "React", "Node.js", "Express", "MongoDB"],
             image: "/portfolio/portfolio-16.png",
+            link: "https://github.com/ziaulhoquepatwary",
             tag: "Health & Fitness"
         },
         {
@@ -144,6 +160,7 @@ export default function PortfolioPage() {
             client: "BrightBank Financial",
             tools: ["React", "Next.js", "Node.js", "PostgreSQL", "TypeScript"],
             image: "/portfolio/portfolio-17.png",
+            link: "https://github.com/ziaulhoquepatwary",
             tag: "Fintech"
         },
         {
@@ -152,6 +169,7 @@ export default function PortfolioPage() {
             client: "ArtisanHub Collective",
             tools: ["React", "Next.js", "Laravel", "Tailwind CSS"],
             image: "/portfolio/portfolio-18.png",
+            link: "https://github.com/ziaulhoquepatwary",
             tag: "E-commerce"
         },
         {
@@ -160,6 +178,7 @@ export default function PortfolioPage() {
             client: "SignalStack Analytics",
             tools: ["React", "D3.js", "Node.js", "GraphQL", "TypeScript"],
             image: "/portfolio/portfolio-19.png",
+            link: "https://github.com/ziaulhoquepatwary",
             tag: "SaaS Platform"
         },
         {
@@ -168,6 +187,7 @@ export default function PortfolioPage() {
             client: "HomeGrid Systems, DE",
             tools: ["React", "Next.js", "Node.js", "MQTT", "Tailwind CSS"],
             image: "/portfolio/portfolio-20.png",
+            link: "https://github.com/ziaulhoquepatwary",
             tag: "IoT"
         },
         {
@@ -176,6 +196,7 @@ export default function PortfolioPage() {
             client: "EventFlow Productions",
             tools: ["React", "Next.js", "Laravel API", "Tailwind CSS", "TypeScript"],
             image: "/portfolio/portfolio-21.png",
+            link: "https://github.com/ziaulhoquepatwary",
             tag: "Events"
         }
     ];
@@ -187,17 +208,7 @@ export default function PortfolioPage() {
     return (
         <section className="w-full min-h-screen py-16 bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-100 transition-colors duration-300">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-                <div className="mb-8">
-                    <Link
-                        href="/"
-                        className="inline-flex items-center gap-2 text-xs font-bold text-slate-500 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors uppercase tracking-wider"
-                    >
-                        <ArrowLeft className="w-4 h-4" />
-                        Back to Home
-                    </Link>
-                </div>
-
+                {/* Header Section */}
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 pb-6 border-b border-slate-100 dark:border-slate-900">
                     <div className="space-y-2 max-w-xl">
                         <div className="flex items-center gap-2">
@@ -217,14 +228,15 @@ export default function PortfolioPage() {
                     </div>
                 </div>
 
+                {/* Tag Filter Buttons */}
                 <div className="flex flex-wrap gap-2 mb-12">
                     {tags.map((tag) => (
                         <button
                             key={tag}
                             onClick={() => setActiveFilter(tag)}
                             className={`px-4 py-1.5 rounded-full text-xs font-bold tracking-wide transition-all ${activeFilter === tag
-                                ? "bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900 shadow-sm"
-                                : "bg-slate-50 dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
+                                    ? "bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900 shadow-xs"
+                                    : "bg-slate-50 dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800"
                                 }`}
                         >
                             {tag}
@@ -232,41 +244,57 @@ export default function PortfolioPage() {
                     ))}
                 </div>
 
+                {/* Projects Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {filteredProjects.map((project, idx) => (
-                        <div
-                            key={idx}
-                            className="flex flex-col space-y-4 bg-transparent group border border-transparent hover:border-slate-100 dark:hover:border-slate-900 rounded-2xl p-2 transition-all duration-300"
-                        >
-                            <div className="relative w-full aspect-[16/10] rounded-xl overflow-hidden border border-slate-100 dark:border-slate-900 bg-slate-50 dark:bg-slate-900 shadow-sm">
+                        <div key={idx} className="flex flex-col space-y-4 bg-transparent group">
+                            {/* Card Image Wrapper */}
+                            <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-900 bg-slate-50 dark:bg-slate-900 shadow-xs">
                                 <Image
                                     src={project.image}
                                     alt={project.title}
                                     fill
-                                    sizes="(max-w-7xl) 33vw, 100vw"
-                                    className="object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                                    sizes="(max-width: 1200px) 33vw, 100vw"
+                                    className="object-cover transition-transform duration-500 group-hover:scale-105"
                                 />
-                                <div className="absolute top-3 right-3 z-10">
-                                    <span className="inline-block bg-blue-600 text-white text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-md shadow-sm">
+                                <div className="absolute top-4 right-4 z-10">
+                                    <span className="inline-block bg-blue-600 text-white text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-md">
                                         {project.tag}
                                     </span>
                                 </div>
+
+                                {/* Hover Overlay with External Link Icon */}
+                                <div className="absolute inset-0 bg-slate-950/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-20">
+                                    <a
+                                        href={project.link}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="p-3 bg-white/90 dark:bg-slate-900/90 text-slate-900 dark:text-white rounded-full shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 hover:bg-cyan-500 hover:text-white dark:hover:bg-cyan-500"
+                                        title="View Project"
+                                    >
+                                        <ExternalLink className="w-5 h-5" />
+                                    </a>
+                                </div>
                             </div>
 
-                            <div className="space-y-2 text-left px-1">
-                                <div className="flex items-start justify-between gap-2">
-                                    <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white tracking-tight leading-snug group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
+                            {/* Card Details */}
+                            <div className="space-y-2 text-left">
+                                <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white tracking-tight leading-snug">
+                                    <a
+                                        href={project.link}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="hover:text-cyan-500 transition-colors"
+                                    >
                                         {project.title}
-                                    </h3>
-                                    <ExternalLink className="w-4 h-4 text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity shrink-0 mt-1" />
-                                </div>
+                                    </a>
+                                </h3>
                                 <p className="text-xs sm:text-sm leading-relaxed text-slate-500 dark:text-slate-400 font-medium line-clamp-3">
                                     {project.description}
                                 </p>
-
                                 <div className="pt-2 flex flex-col space-y-2 border-t border-slate-100 dark:border-slate-900">
                                     <div className="flex items-center gap-2">
-                                        <span className="inline-block px-1.5 py-0.5 rounded bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 text-[9px] font-black tracking-wider">CLIENT</span>
+                                        <span className="inline-block px-2 py-0.5 rounded bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 text-[10px] font-black">CLIENT</span>
                                         <span className="text-xs font-bold text-slate-600 dark:text-slate-400">{project.client}</span>
                                     </div>
                                     <div className="flex flex-wrap gap-1.5 pt-1">
@@ -284,7 +312,6 @@ export default function PortfolioPage() {
                         </div>
                     ))}
                 </div>
-
             </div>
         </section>
     );

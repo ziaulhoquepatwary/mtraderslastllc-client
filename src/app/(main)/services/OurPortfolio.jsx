@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ExternalLink } from "lucide-react";
 
 export default function OurPortfolio() {
     const mainProjects = [
@@ -12,6 +12,7 @@ export default function OurPortfolio() {
             client: "Pixer LLC, US",
             tools: ["React", "Next.js", "Laravel", "Tailwind CSS", "TypeScript"],
             image: "/portfolio/portfolio-1.png",
+            link: "https://github.com/ziaulhoquepatwary",
             tag: "Featured"
         },
         {
@@ -20,6 +21,7 @@ export default function OurPortfolio() {
             client: "Pickbazar Global",
             tools: ["Next.js", "React", "GraphQL", "REST API", "Tailwind CSS"],
             image: "/portfolio/portfolio-2.png",
+            link: "https://github.com/ziaulhoquepatwary",
             tag: "Enterprise"
         },
         {
@@ -28,6 +30,7 @@ export default function OurPortfolio() {
             client: "ChawkBazar Group",
             tools: ["React", "Next.js", "Laravel API", "Tailwind CSS"],
             image: "/portfolio/portfolio-3.png",
+            link: "https://github.com/ziaulhoquepatwary",
             tag: "SaaS Platform"
         }
     ];
@@ -53,25 +56,45 @@ export default function OurPortfolio() {
                 {/* 3-Column Portfolio Layout */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {mainProjects.map((project, idx) => (
-                        <div key={idx} className="flex flex-col space-y-4 bg-transparent group pointer-events-none">
+                        <div key={idx} className="flex flex-col space-y-4 bg-transparent group">
                             <div className="relative w-full aspect-[16/10] rounded-2xl overflow-hidden border border-slate-100 dark:border-slate-900 bg-slate-50 dark:bg-slate-900 shadow-xs">
                                 <Image
                                     src={project.image}
                                     alt={project.title}
                                     fill
-                                    sizes="(max-w-7xl) 33vw, 100vw"
-                                    className="object-cover"
+                                    sizes="(max-width: 1200px) 33vw, 100vw"
+                                    className="object-cover transition-transform duration-500 group-hover:scale-105"
                                 />
                                 <div className="absolute top-4 right-4 z-10">
                                     <span className="inline-block bg-blue-600 text-white text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-md">
                                         {project.tag}
                                     </span>
                                 </div>
+
+                                {/* Hover Overlay with External Link */}
+                                <div className="absolute inset-0 bg-slate-950/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-20">
+                                    <a
+                                        href={project.link}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="p-3 bg-white/90 dark:bg-slate-900/90 text-slate-900 dark:text-white rounded-full shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 hover:bg-cyan-500 hover:text-white dark:hover:bg-cyan-500"
+                                        title="View Project"
+                                    >
+                                        <ExternalLink className="w-5 h-5" />
+                                    </a>
+                                </div>
                             </div>
 
                             <div className="space-y-2 text-left">
                                 <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white tracking-tight leading-snug">
-                                    {project.title}
+                                    <a
+                                        href={project.link}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="hover:text-cyan-500 transition-colors"
+                                    >
+                                        {project.title}
+                                    </a>
                                 </h3>
                                 <p className="text-xs sm:text-sm leading-relaxed text-slate-500 dark:text-slate-400 font-medium line-clamp-3">
                                     {project.description}
