@@ -2,6 +2,8 @@
 
 import { useForm } from "react-hook-form";
 import { Phone, Mail, Clock, Building2, Globe, MessageSquareCode, Send } from "lucide-react";
+import Swal from "sweetalert2";
+import { sendContactEmail } from "@/lib/action/contact";
 
 function ContactSection() {
     const whatsappUrl = "https://wa.me/13163617579";
@@ -10,18 +12,58 @@ function ContactSection() {
     const {
         register,
         handleSubmit,
+        reset,
         formState: { errors, isSubmitting },
     } = useForm({
         defaultValues: {
             name: "",
             email: "",
             service: "",
-            message: ""
-        }
+            message: "",
+        },
+        mode: "onTouched",
     });
 
-    const onSubmit = async (data) => {
-        console.log("Submitted Data:", data);
+    const onSubmit = async (formData) => {
+        Swal.fire({
+            title: "Sending Message...",
+            text: "Please wait a moment while we process your request.",
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            },
+        });
+
+        try {
+            const res = await sendContactEmail(formData);
+
+            const isSuccess = res?.success || res?.data?.success || res?.status === 200;
+
+            if (isSuccess) {
+                Swal.fire({
+                    icon: "success",
+                    title: "Message Sent!",
+                    text: "Thank you for reaching out. We will get back to you soon!",
+                    confirmButtonColor: "#0891b2",
+                });
+
+                reset();
+            } else {
+                throw new Error(res?.data?.message || res?.message || "Failed to send email");
+            }
+        } catch (error) {
+            console.error("Error submitting form:", error);
+
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text:
+                    error?.response?.data?.message ||
+                    error?.message ||
+                    "Something went wrong! Please try again later.",
+                confirmButtonColor: "#ef4444",
+            });
+        }
     };
 
     return (
@@ -161,46 +203,53 @@ function ContactSection() {
                                 </h3>
                             </div>
 
-                            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 flex flex-col h-full justify-between">
-
+                            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 flex flex-col h-full justify-between" noValidate>
                                 <div className="space-y-6 flex-1 flex flex-col">
+                                    {/* Name Input */}
                                     <div className="space-y-2">
                                         <label htmlFor="name" className="text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300">
-                                            Your Name
+                                            Your Name <span className="text-red-500">*</span>
                                         </label>
                                         <input
                                             id="name"
                                             type="text"
                                             placeholder="John Doe"
-                                            className={`w-full px-4 py-3.5 rounded-xl border bg-white dark:bg-slate-950 text-sm outline-hidden transition-all duration-200 focus:ring-2 ${errors.name
+                                            className={`w-full px-4 py-3.5 rounded-xl border bg-white dark:bg-slate-950 text-sm outline-none transition-all duration-200 focus:ring-2 ${errors.name
                                                 ? "border-red-500 focus:ring-red-500/20 focus:border-red-500"
                                                 : "border-slate-200 dark:border-slate-800 focus:ring-cyan-500/20 focus:border-cyan-500"
                                                 }`}
-                                            {...register("name", { required: "Name is required" })}
+                                            {...register("name", {
+                                                required: "Name is required",
+                                                minLength: {
+                                                    value: 2,
+                                                    message: "Name must be at least 2 characters",
+                                                },
+                                            })}
                                         />
                                         {errors.name && (
                                             <span className="text-xs font-semibold text-red-500">{errors.name.message}</span>
                                         )}
                                     </div>
 
+                                    {/* Email Input */}
                                     <div className="space-y-2">
                                         <label htmlFor="email" className="text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300">
-                                            Email Address
+                                            Email Address <span className="text-red-500">*</span>
                                         </label>
                                         <input
                                             id="email"
                                             type="email"
                                             placeholder="you@example.com"
-                                            className={`w-full px-4 py-3.5 rounded-xl border bg-white dark:bg-slate-950 text-sm outline-hidden transition-all duration-200 focus:ring-2 ${errors.email
+                                            className={`w-full px-4 py-3.5 rounded-xl border bg-white dark:bg-slate-950 text-sm outline-none transition-all duration-200 focus:ring-2 ${errors.email
                                                 ? "border-red-500 focus:ring-red-500/20 focus:border-red-500"
                                                 : "border-slate-200 dark:border-slate-800 focus:ring-cyan-500/20 focus:border-cyan-500"
                                                 }`}
                                             {...register("email", {
                                                 required: "Email is required",
                                                 pattern: {
-                                                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                                                    message: "Invalid email address"
-                                                }
+                                                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                                                    message: "Please enter a valid email address",
+                                                },
                                             })}
                                         />
                                         {errors.email && (
@@ -208,14 +257,15 @@ function ContactSection() {
                                         )}
                                     </div>
 
+                                    {/* Service Input */}
                                     <div className="space-y-2">
                                         <label htmlFor="service" className="text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300">
-                                            Service Title
+                                            Service Title <span className="text-red-500">*</span>
                                         </label>
                                         <div className="relative">
                                             <select
                                                 id="service"
-                                                className={`w-full px-4 py-3.5 rounded-xl border bg-white dark:bg-slate-950 text-sm outline-hidden appearance-none transition-all duration-200 focus:ring-2 ${errors.service
+                                                className={`w-full px-4 py-3.5 rounded-xl border bg-white dark:bg-slate-950 text-sm outline-none appearance-none transition-all duration-200 focus:ring-2 ${errors.service
                                                     ? "border-red-500 focus:ring-red-500/20 focus:border-red-500"
                                                     : "border-slate-200 dark:border-slate-800 focus:ring-cyan-500/20 focus:border-cyan-500"
                                                     }`}
@@ -243,18 +293,26 @@ function ContactSection() {
                                         )}
                                     </div>
 
+                                    {/* Message Input */}
                                     <div className="space-y-2 flex-1 flex flex-col">
                                         <label htmlFor="message" className="text-xs sm:text-sm font-bold text-slate-700 dark:text-slate-300">
-                                            Your Message
+                                            Your Message <span className="text-red-500">*</span>
                                         </label>
                                         <textarea
                                             id="message"
+                                            rows={5}
                                             placeholder="Tell us about your project, target audience, and goals..."
-                                            className={`w-full flex-1 px-4 py-3.5 rounded-xl border bg-white dark:bg-slate-950 text-sm outline-hidden transition-all duration-200 focus:ring-2 resize-none ${errors.message
+                                            className={`w-full flex-1 px-4 py-3.5 rounded-xl border bg-white dark:bg-slate-950 text-sm outline-none transition-all duration-200 focus:ring-2 resize-none ${errors.message
                                                 ? "border-red-500 focus:ring-red-500/20 focus:border-red-500"
                                                 : "border-slate-200 dark:border-slate-800 focus:ring-cyan-500/20 focus:border-cyan-500"
                                                 }`}
-                                            {...register("message", { required: "Message is required" })}
+                                            {...register("message", {
+                                                required: "Message is required",
+                                                minLength: {
+                                                    value: 10,
+                                                    message: "Message must be at least 10 characters",
+                                                },
+                                            })}
                                         />
                                         {errors.message && (
                                             <span className="text-xs font-semibold text-red-500">{errors.message.message}</span>
@@ -262,11 +320,12 @@ function ContactSection() {
                                     </div>
                                 </div>
 
+                                {/* Submit Button */}
                                 <div className="pt-4">
                                     <button
                                         type="submit"
                                         disabled={isSubmitting}
-                                        className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 text-sm font-bold text-white bg-gradient-to-r from-cyan-500 via-blue-600 to-cyan-500 bg-[length:200%_auto] bg-[position:0%_center] rounded-xl hover:bg-[position:100%_center] transition-all duration-500 shadow-lg shadow-cyan-500/10 active:scale-95 disabled:opacity-75 disabled:cursor-not-allowed group"
+                                        className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 text-sm font-bold text-white bg-gradient-to-r from-cyan-500 via-blue-600 to-cyan-500 bg-[length:200%_auto] bg-[position:0%_center] rounded-xl hover:bg-[position:100%_center] transition-all duration-500 shadow-lg shadow-cyan-500/10 active:scale-95 disabled:opacity-75 disabled:cursor-not-allowed group cursor-pointer"
                                     >
                                         {isSubmitting ? (
                                             <>
@@ -284,7 +343,6 @@ function ContactSection() {
                                         )}
                                     </button>
                                 </div>
-
                             </form>
                         </div>
                     </div>

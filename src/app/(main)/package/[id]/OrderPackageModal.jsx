@@ -4,6 +4,7 @@ import { useState, useRef } from 'react';
 import { X, Phone, Link as LinkIcon, ArrowUpRight } from 'lucide-react';
 import { authClient } from '@/lib/auth-client';
 import Swal from 'sweetalert2';
+import ProtectedRoute from '@/middleware/ProtectedRoute';
 
 export default function OrderPackageModal({ packageData }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -111,13 +112,15 @@ export default function OrderPackageModal({ packageData }) {
 
     return (
         <>
-            <button
-                onClick={() => setIsOpen(true)}
-                className="group w-full flex items-center justify-center gap-2 py-4 px-6 rounded-full text-base font-semibold text-white bg-linear-to-r from-cyan-500 via-blue-600 to-cyan-500 bg-size-[200%_auto] bg-position-[0%_center] hover:bg-position-[100%_center] transition-all duration-500 cursor-pointer"
-            >
-                Order This Package
-                <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </button>
+            <ProtectedRoute>
+                <button
+                    onClick={() => setIsOpen(true)}
+                    className="group w-full flex items-center justify-center gap-2 py-4 px-6 rounded-full text-base font-semibold text-white bg-linear-to-r from-cyan-500 via-blue-600 to-cyan-500 bg-size-[200%_auto] bg-position-[0%_center] hover:bg-position-[100%_center] transition-all duration-500 cursor-pointer"
+                >
+                    Order This Package
+                    <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </button>
+            </ProtectedRoute>
 
             {isOpen && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
