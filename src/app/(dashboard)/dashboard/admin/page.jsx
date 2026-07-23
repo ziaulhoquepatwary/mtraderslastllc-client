@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Users, ShoppingBag, FolderOpen, DollarSign, Calendar, Plus, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { fetchAdminDashboardStats } from "@/lib/action/dashboard";
+import AdminEarningsChart from "../../components/AdminEarningsChart";
 
 function AdminDashboard() {
     const [statsData, setStatsData] = useState(null);
@@ -123,6 +124,8 @@ function AdminDashboard() {
                         );
                     })}
                 </div>
+
+                <AdminEarningsChart />
             </div>
         </div>
     );

@@ -14,3 +14,15 @@ export const fetchAdminDashboardStats = () => {
         axios.get(`${API_URL}/admin/dashboard-stats`, { withCredentials: true })
     );
 };
+
+export const fetchUserMonthlyExpense = () => {
+    return apiHandler(() =>
+        axios.get(`${API_URL}/orders/monthly-expense`, { withCredentials: true })
+    );
+};
+
+export const fetchAdminMonthlyRevenue = () => {
+    return apiHandler(() =>
+        axios.get(`${API_URL}/monthly-revenue`, { withCredentials: true })
+    );
+};

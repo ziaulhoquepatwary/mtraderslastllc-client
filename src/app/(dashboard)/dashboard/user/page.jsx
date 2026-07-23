@@ -5,6 +5,7 @@ import { authClient } from "@/lib/auth-client";
 import { CreditCard, Gift, Layers, Plus, ShoppingBag, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { fetchDashboardStats } from "@/lib/action/dashboard";
+import UserExpenseChart from "../../components/UserExpenseChart";
 
 function DashboardOverview() {
     const { data: session, isPending: isSessionLoading } = authClient.useSession();
@@ -131,6 +132,8 @@ function DashboardOverview() {
                         );
                     })}
                 </div>
+
+                <UserExpenseChart />
             </div>
         </div>
     );
