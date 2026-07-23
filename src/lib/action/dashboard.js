@@ -5,6 +5,12 @@ const API_URL = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/dashboard`;
 
 export const fetchDashboardStats = () => {
     return apiHandler(() =>
-        axios.get(`${API_URL}/user-activity`, { withCredentials: true })
+        axios.get(`${API_URL}/user/dashboard-stats`, { withCredentials: true })
+    );
+};
+
+export const fetchAdminDashboardStats = () => {
+    return apiHandler(() =>
+        axios.get(`${API_URL}/admin/dashboard-stats`, { withCredentials: true })
     );
 };
