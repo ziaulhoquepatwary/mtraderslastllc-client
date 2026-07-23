@@ -27,8 +27,8 @@ export const updateOrderStatus = (orderId, statusData) => {
     );
 };
 
-export const cancelOrder = (orderData) => {
+export const cancelOrder = (orderId) => {
     return apiHandler(() =>
-        axios.delete(`${API_URL}/cancel-order`, { data: orderData, withCredentials: true })
+        axios.delete(`${API_URL}/cancel-order/${orderId}`, { withCredentials: true })
     );
 };

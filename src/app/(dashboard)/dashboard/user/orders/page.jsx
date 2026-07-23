@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { fetchMyOrders, fetchOrderDetails } from '@/lib/action/order';
+import CancelOrderButton from './CancelOrderButton';
 
 export default function MyOrdersPage() {
     const [orders, setOrders] = useState([]);
@@ -49,6 +50,23 @@ export default function MyOrdersPage() {
     const closeModal = () => {
         setIsModalOpen(false);
         setSelectedOrder(null);
+    };
+
+    const handleOrderCancelledSuccess = (cancelledOrderId) => {
+        setOrders((prevOrders) =>
+            prevOrders.map((o) =>
+                o._id === cancelledOrderId
+                    ? { ...o, status: 'cancelled', paymentStatus: 'refunded' }
+                    : o
+            )
+        );
+        if (selectedOrder && selectedOrder._id === cancelledOrderId) {
+            setSelectedOrder((prev) => ({
+                ...prev,
+                status: 'cancelled',
+                paymentStatus: 'refunded'
+            }));
+        }
     };
 
     // Helper for Status Badge Styling using your color system
@@ -211,6 +229,14 @@ export default function MyOrdersPage() {
                                                     View Details
                                                 </button>
 
+                                                {/* Cancel Button only for non-cancelled and non-completed orders */}
+                                                {order.status !== 'cancelled' && order.status !== 'completed' && (
+                                                    <CancelOrderButton
+                                                        order={order}
+                                                        onOrderCancelled={handleOrderCancelledSuccess}
+                                                    />
+                                                )}
+
                                                 <Link
                                                     href={`/package/${order.packageId}`}
                                                     className="px-3.5 py-1.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-[#1E293B] dark:text-[#F8FAFC] font-medium text-xs rounded-lg transition-colors border border-slate-200 dark:border-slate-700"
@@ -294,7 +320,7 @@ export default function MyOrdersPage() {
                                     <div>
                                         <p className="text-xs text-[#64748B] dark:text-[#94A3B8]">Delivery Time</p>
                                         <p className="text-sm font-semibold text-[#0F172A] dark:text-[#FFFFFF] mt-0.5">
-                                            {selectedOrder.deliveryTime} Days
+                                            {selectedOrder.deliveryTime}
                                         </p>
                                     </div>
                                     <div>
@@ -357,7 +383,15 @@ export default function MyOrdersPage() {
                         )}
 
                         {/* Modal Footer */}
-                        <div className="mt-6 border-t border-slate-200 dark:border-slate-800 pt-4 text-right">
+                        <div className="mt-6 border-t border-slate-200 dark:border-slate-800 pt-4 flex items-center justify-between">
+                            <div>
+                                {selectedOrder && selectedOrder.status !== 'cancelled' && selectedOrder.status !== 'completed' && (
+                                    <CancelOrderButton
+                                        order={selectedOrder}
+                                        onOrderCancelled={handleOrderCancelledSuccess}
+                                    />
+                                )}
+                            </div>
                             <button
                                 onClick={closeModal}
                                 className="px-5 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-[#1E293B] dark:text-[#F8FAFC] font-semibold rounded-lg text-sm transition-colors"
